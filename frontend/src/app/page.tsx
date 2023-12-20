@@ -1,13 +1,14 @@
-import Image from "next/image";
 import styles from "./page.module.css";
-import Card from "./UI/card/card";
 import AddProduct from "./components/product/AddProduct";
-// import ListItem from "./UI/listItem/listItem";
+import Login from "./components/authentication/Login";
+import Register from "./components/authentication/Register";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <AddProduct />
+      {/* <AddProduct /> */}
+      {/* <Login /> */}
+      <Register />
     </main>
   );
 }
