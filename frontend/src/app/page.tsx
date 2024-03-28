@@ -1,14 +1,9 @@
-import styles from "./page.module.css";
-import AddProduct from "./components/product/AddProduct";
-import Login from "./components/authentication/Login";
-import Register from "./components/authentication/Register";
+import Register from "@/components/account/register";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      {/* <AddProduct /> */}
-      {/* <Login /> */}
-      <Register />
+    <main className="flex min-h-screen flex-col items-center justify-between">
+       <Register /> 
     </main>
   );
 }
