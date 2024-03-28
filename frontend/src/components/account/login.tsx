@@ -1,4 +1,5 @@
-'use client';
+"use client";
+import Link from "next/link";
 import React from "react";
 
 const Login = () => {
@@ -32,12 +33,24 @@ const Login = () => {
             clipRule="evenodd"
           />
         </svg>
-        <input type="password" className="grow" placeholder="password" />
+        <input type="password" className="grow" placeholder="Password" />
       </label>
 
-      <button className="btn btn-primary" onClick={loginHandler}>
-        Login
-      </button>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-row text-xs gap-2">
+          Don&apos;t have an account ?
+          <Link
+            href={"/signup"}
+            className="text-primary hover:underline hover:underline-offset-2"
+          >
+            <span className="text-primary">Click to register</span>
+          </Link>
+        </div>
+
+        <button className="btn btn-primary" onClick={loginHandler}>
+          Login
+        </button>
+      </div>
     </div>
   );
 };
