@@ -1,7 +1,7 @@
 'use client';
 import React from "react";
 
-const login = () => {
+const Login = () => {
   const loginHandler = () => {
     alert("clicked");
   };
@@ -42,4 +42,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
