@@ -34,3 +34,4 @@ frontend/.vercel
 # typescript
 frontend/*.tsbuildinfo
 frontend/next-env.d.ts
+WebShop/__pycache__/
