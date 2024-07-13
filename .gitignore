@@ -35,3 +35,4 @@ frontend/.vercel
 frontend/*.tsbuildinfo
 frontend/next-env.d.ts
 **/__pycache__/
+db.sqlite3
