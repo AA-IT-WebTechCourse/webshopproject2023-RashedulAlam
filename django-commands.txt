@@ -1,0 +1,23 @@
+# runs the django server 
+python manage.py runserver 
+
+# updates the requirements file from packages
+pip freeze > requirements.txt
+
+# creates the super user for django admin
+python manage.py createsuperuser
+
+# runs the pending migration 
+python manage.py migrate
+
+# generates the migration
+python manage.py makemigrations
+
+# creates new django app
+python manage.py startapp initialization
+
+# creates the virtual environment 
+virtualenv .venv
+
+# activates the virtual environment
+.\.venv\Scripts\activate
