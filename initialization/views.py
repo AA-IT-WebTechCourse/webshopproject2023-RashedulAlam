@@ -8,7 +8,7 @@ class InitializationView(APIView):
 
     """
     post:
-    Return a list of initialization apis.
+    Initializes the system by creating six users with products.
     """
 
     def post(self, request):
