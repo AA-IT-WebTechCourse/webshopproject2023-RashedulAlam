@@ -20,6 +20,7 @@ const Login = () => {
         </svg>
         <input type="text" className="grow" placeholder="Username" />
       </label>
+
       <label className="input input-bordered flex items-center gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,9 +39,9 @@ const Login = () => {
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-row text-xs gap-2">
-          Don&apos;t have an account ?
+          Don&apos;t have an account?
           <Link
-            href={"/signup"}
+            href="/signup"
             className="text-primary hover:underline hover:underline-offset-2"
           >
             <span className="text-primary">Click to register</span>
