@@ -1,64 +1,57 @@
-"use client";
-import Link from "next/link";
 import React from "react";
 
-const Register = () => {
-  const registerHandler = () => {
-    alert("clicked");
-  };
-
+const AddProduct = () => {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
         <h2 className="text-3xl font-bold mb-6 text-center text-white">
           <span className="bg-gradient-to-r text-transparent from-blue-500 to-purple-500 bg-clip-text">
-            Register
+            Add Product to Inventory
           </span>
         </h2>
         <form>
           <div className="mb-6">
             <label
-              htmlFor="username"
+              htmlFor="title"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Username
+              Title
             </label>
             <div>
               <input
-                id="username"
+                id="title"
                 type="text"
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter your username"
+                placeholder="Enter product title"
               />
             </div>
           </div>
           <div className="mb-6">
             <label
-              htmlFor="email"
+              htmlFor="price"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Email
+              Price
             </label>
             <div>
               <input
-                id="email"
-                type="email"
+                id="price"
+                type="number"
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter your email"
+                placeholder="Enter product price"
               />
             </div>
           </div>
           <div className="mb-6">
             <label
-              htmlFor="password"
+              htmlFor="description"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Password
+              Description
             </label>
             <div>
-              <input
-                id="password"
-                type="password"
+              <textarea
+                id="description"
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Enter your password"
               />
@@ -69,19 +62,13 @@ const Register = () => {
               type="submit"
               className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
             >
-              Register
+              Create
             </button>
           </div>
         </form>
-        <p className="text-center text-gray-600 mt-6">
-          Already have an account?
-          <Link href="/login" className="text-blue-500 hover:underline ml-2">
-            Sign in
-          </Link>
-        </p>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default AddProduct;
