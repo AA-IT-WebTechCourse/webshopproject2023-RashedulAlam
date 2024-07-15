@@ -1,9 +1,11 @@
 import Register from "@/components/account/register";
 
-export default function SignUpPage() {
+const SignUpPage = () => {
   return (
     <main className="container">
       <Register />
     </main>
   );
-}
+};
+
+export default SignUpPage;

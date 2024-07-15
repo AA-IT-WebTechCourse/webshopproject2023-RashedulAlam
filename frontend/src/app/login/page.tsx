@@ -1,9 +1,11 @@
 import Login from "@/components/account/login";
 
-export default function LoginPage() {
+const LoginPage = () => {
   return (
     <main className="container">
-       <Login /> 
+      <Login />
     </main>
   );
-}
+};
+
+export default LoginPage;
