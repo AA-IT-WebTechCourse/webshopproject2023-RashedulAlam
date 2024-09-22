@@ -1,9 +1,11 @@
-import AddProduct from "@/components/product/addProduct";
+import LandingPage from "@/components/LandingPage/landingPage";
 
 export default function Home() {
   return (
-    <main className="flex min-h-[90vh] flex-col items-center justify-between">
-       {/* <AddProduct /> */}
+    <main className="container mx-auto">
+      <div className="flex justify-center min-h-[87vh]">
+        <LandingPage />
+      </div>
     </main>
   );
 }

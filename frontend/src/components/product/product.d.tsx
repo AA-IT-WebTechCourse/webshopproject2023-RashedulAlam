@@ -2,7 +2,12 @@ export interface IProductCardProps {
   title: string;
   description: string;
   price: number;
-  categories: string[];
   tag: string;
-  photo: string;
+  created_at?: string;
+  viewType: ViewType;
+}
+
+export enum ViewType {
+  LIST_VIEW,
+  GRID_VIEW,
 }

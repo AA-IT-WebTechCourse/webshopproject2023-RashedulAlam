@@ -2,7 +2,7 @@ import Login from "@/components/account/login";
 
 const LoginPage = () => {
   return (
-    <main className="container">
+    <main className="container mx-auto">
       <Login />
     </main>
   );

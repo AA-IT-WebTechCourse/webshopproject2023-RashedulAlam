@@ -1,24 +1,28 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-type TRegisterUser = {
+interface IUserAccount {
   username: string;
-  password: string;
-  confirmPassword: string;
   email: string;
+}
+
+type TUpdateUserAccount = {
+  password: string;
+  newPassword: string;
+  newConfirmPassword: string;
 };
 
-const Register = () => {
+const UpdateAccount = () => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<TRegisterUser>();
+  } = useForm<TUpdateUserAccount>();
 
-  const onSubmit: SubmitHandler<TRegisterUser> = (data) => {
+  const onSubmit: SubmitHandler<TUpdateUserAccount> = (data) => {
     console.log(errors);
     console.log(data);
   };
@@ -27,53 +31,9 @@ const Register = () => {
     <div className="flex justify-center items-center min-h-[75vh] w-full">
       <div className="px-4 pt-6 pb-8 mb-4 w-full max-w-lg">
         <h2 className="text-3xl font-bold mb-6 text-center ">
-          <span className="text-blue-500 bg-clip-text">Register</span>
+          <span className="text-blue-500 bg-clip-text">Account Setting</span>
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="mb-6">
-            <label
-              htmlFor="username"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Username
-            </label>
-            <div>
-              <input
-                id="username"
-                type="text"
-                {...register("username", { required: true })}
-                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter username"
-              />
-            </div>
-            {errors.username?.type === "required" && (
-              <p role="alert" className="text-red-600 font-semibold mt-2">
-                Username is required
-              </p>
-            )}
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Email
-            </label>
-            <div>
-              <input
-                id="email"
-                type="email"
-                {...register("email", { required: true })}
-                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter email"
-              />
-            </div>
-            {errors.email?.type === "required" && (
-              <p role="alert" className="text-red-600 font-semibold mt-2">
-                Email is required
-              </p>
-            )}
-          </div>
           <div className="mb-6">
             <label
               htmlFor="password"
@@ -98,6 +58,28 @@ const Register = () => {
           </div>
           <div className="mb-6">
             <label
+              htmlFor="new_password"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              New Password
+            </label>
+            <div>
+              <input
+                id="new_password"
+                type="password"
+                {...register("newPassword", { required: true })}
+                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter password"
+              />
+            </div>
+            {errors.password?.type === "required" && (
+              <p role="alert" className="text-red-600 font-semibold mt-2">
+                New Password is required
+              </p>
+            )}
+          </div>
+          <div className="mb-6">
+            <label
               htmlFor="confirm_password"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
@@ -107,23 +89,23 @@ const Register = () => {
               <input
                 id="confirm_password"
                 type="password"
-                {...register("confirmPassword", {
+                {...register("newConfirmPassword", {
                   required: true,
                   validate: (value) =>
-                    value === watch("password") || "Passwords do not match",
+                    value === watch("newPassword") || "Passwords do not match",
                 })}
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Confirm password"
               />
             </div>
-            {errors.confirmPassword?.type === "required" && (
+            {errors.newConfirmPassword?.type === "required" && (
               <p role="alert" className="text-red-600 font-semibold mt-2">
-                Confirm Password is required
+                New Confirm Password is required
               </p>
             )}
-            {errors.confirmPassword?.message  && (
+            {errors.newConfirmPassword?.message && (
               <p role="alert" className="text-red-600 font-semibold mt-2">
-                Passwords do not match
+                New Passwords do not match
               </p>
             )}
           </div>
@@ -136,15 +118,9 @@ const Register = () => {
             </button>
           </div>
         </form>
-        <p className="text-center text-gray-600 mt-6">
-          Already have an account?
-          <Link href="/login" className="text-blue-500 hover:underline ml-2 font-semibold">
-            Sign in
-          </Link>
-        </p>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default UpdateAccount;
