@@ -2,7 +2,7 @@ import AddProduct from "@/components/product/addProduct";
 
 const AddProductPage = () => {
   return (
-    <main className="container">
+    <main className="container mx-auto">
       <AddProduct />
     </main>
   );
