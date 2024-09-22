@@ -10,6 +10,7 @@ class InitializationView(APIView):
     post:
     Initializes the system by creating six users with products.
     """
+    permission_classes = []
 
     def post(self, request):
 
