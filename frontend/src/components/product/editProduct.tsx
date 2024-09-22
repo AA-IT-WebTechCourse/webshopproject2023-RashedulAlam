@@ -8,7 +8,7 @@ type TCreateProduct = {
   description: string;
 };
 
-const AddProduct = () => {
+const EditProduct = () => {
   const {
     register,
     handleSubmit,
@@ -24,7 +24,7 @@ const AddProduct = () => {
     <div className="flex justify-center items-center min-w-full ">
       <div className="px-4 pt-6 pb-8 mb-4 w-full max-w-xl">
         <h2 className="text-3xl font-bold mb-6 text-left text-blue-600">
-          <span className=" bg-clip-text">Add Product</span>
+          <span className=" bg-clip-text">Update Product</span>
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6 flex flex-col">
@@ -110,4 +110,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

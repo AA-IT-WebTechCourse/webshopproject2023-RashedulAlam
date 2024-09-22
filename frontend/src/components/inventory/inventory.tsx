@@ -1,21 +1,25 @@
 "use client";
 import React, { useState } from "react";
 import withAuth from "../HOC/withAuth";
+import InventoryCard from "./inventoryCard";
+import Pagination from "../pagination/pagination";
+import { ETabNames } from "./inventory.d";
+import { useRouter } from "next/navigation";
 
 interface IInventoryProps {}
 
-enum ETabNames {
-  SALE = "sale",
-  SOLD = "sold",
-  PURCHASED = "purchased",
-}
-
 const Inventory: React.FC<IInventoryProps> = () => {
   const [activeTab, setActiveTab] = useState<string>(ETabNames.SALE);
+  const products = Array(10).fill(10);
+  const router = useRouter();
 
   const tabClass = {
     active: " bg-gray-200 hover:bg-gray-200",
     inactive: " hover:bg-gray-200 ",
+  };
+
+  const navigateToNewProduct = () => {
+    router.push("/myitems/add-product");
   };
 
   const getTabClass = (tabName: string) => {
@@ -56,14 +60,36 @@ const Inventory: React.FC<IInventoryProps> = () => {
           </button>
         </li>
       </ul>
-      <div className="hidden px-1 py-2" data-tabs-target="panel">
-        <h3 className="text-lg font-semibold">Profile</h3>
-      </div>
-      <div className="hidden px-1 py-2" data-tabs-target="panel">
-        <h3 className="text-lg font-semibold">Dashboard</h3>
-      </div>
-      <div className="hidden px-1 py-2" data-tabs-target="panel">
-        <h3 className="text-lg font-semibold">Settings</h3>
+      <div className="px-1 py-2 flex flex-col gap-4">
+        {activeTab == ETabNames.SALE && (
+          <div className="flex flex-row items-center gap-2">
+            <button
+              aria-label="add product"
+              className="rounded-full w-10 h-10 bg-blue-600 flex flex-row text-white"
+              onClick={() => navigateToNewProduct()}
+            >
+              <svg
+                width="32"
+                height="32"
+                stroke="white"
+                stroke-width="3"
+                className="m-2"
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <p className="text-blue-500 font-semibold text-sm">Add Product</p>
+          </div>
+        )}
+        <div className="flex flex-col gap-4">
+          {products.map((x, i) => (
+            <InventoryCard key={i} viewType={activeTab} />
+          ))}
+        </div>
+        <div>
+          <Pagination />
+        </div>
       </div>
     </div>
   );

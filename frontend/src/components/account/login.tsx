@@ -27,7 +27,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-[75vh]">
+    <div className="flex justify-center items-center">
       <div className="px-8 pt-6 pb-8 mb-4 w-full max-w-md">
         <h2 className="text-3xl font-bold mb-6 text-center">
           <span className="text-blue-500 bg-clip-text">Log In</span>

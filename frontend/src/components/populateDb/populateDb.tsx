@@ -19,7 +19,7 @@ const PopulateDb = () => {
         emptied.`;
 
   return (
-    <div className="flex flex-col items-center gap-6 min-h-[70vh] w-full">
+    <div className="flex flex-col items-center gap-6 w-full">
       <p className="text-red-400 text-sm font-semibold">{label}</p>
       <button
         className="bg-blue-600 w-fit h-fit p-3 rounded flex gap-2 justify-between items-center"
