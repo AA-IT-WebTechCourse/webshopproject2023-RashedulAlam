@@ -4,20 +4,32 @@ import { url } from "inspector";
 import Link from "next/link";
 import React from "react";
 import UserMenu from "./userMenu";
+import CartInfo from "./cartInfo";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const { user } = useAuth();
+  const router = useRouter();
+
+  const nagivateToCartDetails = () => {
+    router.push("/cart");
+  };
+
+  const cartInfoProps = {
+    count: 1,
+    onIconClick: nagivateToCartDetails,
+  };
 
   const additionalMenus = [
     {
-      name: "DB Population",
+      name: "Database Population",
       url: "/db-population",
     },
-    ...(!!user
+    ...(true
       ? [
           {
-            name: "My Items",
+            name: "Inventory",
             url: "/myitems",
           },
         ]
@@ -95,6 +107,7 @@ const Navbar = () => {
                 Sign up
               </Link>
             </div>
+            <CartInfo {...cartInfoProps} />
             <UserMenu />
           </div>
         </div>
