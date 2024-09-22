@@ -13,6 +13,9 @@ const ProductCard = ({
       {viewType === ViewType.GRID_VIEW && (
         <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
           <div className="px-4 py-3 w-72">
+            <p className="text-white text-xs w-fit p-1 rounded-md bg-yellow-500">
+              Seller: ralam
+            </p>
             <p className="text-lg font-bold text-blue-600 truncate block capitalize">
               Product Title
             </p>
@@ -24,8 +27,8 @@ const ProductCard = ({
               survived not only five centuries, but also the leap into
               electronic typesetting, remaining essentially unchanged.
             </div>
-            <p className="text-blue-400 text-xs pb-2">
-              Published on: 2012-12-12 10 am
+            <p className="text-white text-xs w-fit p-1 rounded-md bg-green-500">
+              Published: 2012-12-12 10 am
             </p>
             <div className="flex items-center">
               <p className="text-lg font-semibold text-blue-400 cursor-auto my-3">
@@ -57,17 +60,19 @@ const ProductCard = ({
       {viewType === ViewType.LIST_VIEW && (
         <div className="w-full bg-white shadow-md rounded-xl duration-500 hover:scale-[1.02] hover:shadow-xl flex flex-row justify-between">
           <div className="flex">
-            <div className="px-4 py-3 w-72 flex flex-col justify-between">
-              <div className="flex flex-col">
-                <p className="text-lg font-bold text-blue-600 truncate block capitalize">
-                  Product Title
-                </p>
-
-                <p className="text-blue-400 text-xs pb-2">
-                  Published on: 2012-12-12 10 am
+            <div className="px-4 py-3 w-fit flex flex-col justify-start gap-1">
+              <p className="text-white text-xs w-fit p-1 rounded-md bg-yellow-500">
+                Seller: ralam
+              </p>
+              <p className="text-lg font-bold text-blue-800 truncate block capitalize">
+                Product Title
+              </p>
+              <div className="flex flex-row gap-2">
+                <p className="text-white text-xs w-fit p-1 rounded-md bg-green-500">
+                  Published Date: 2012-12-12 10 am
                 </p>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center mt-10">
                 <p className="text-lg font-semibold text-blue-400 cursor-auto">
                   $149
                 </p>

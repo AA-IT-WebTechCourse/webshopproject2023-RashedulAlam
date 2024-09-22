@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface IUserAccount {
@@ -27,13 +27,54 @@ const UpdateAccount = () => {
     console.log(data);
   };
 
+  const [currentInfo] = useState({
+    username: "ralam",
+    email: "ralam@gmail.com",
+  });
+
   return (
-    <div className="flex justify-center items-center min-h-[75vh] w-full">
+    <div className="flex justify-center items-center w-full">
       <div className="px-4 pt-6 pb-8 mb-4 w-full max-w-lg">
         <h2 className="text-3xl font-bold mb-6 text-center ">
           <span className="text-blue-500 bg-clip-text">Account Setting</span>
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <div className="mb-6">
+            <label
+              htmlFor="username"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Username
+            </label>
+            <div>
+              <input
+                defaultValue={currentInfo.username}
+                id="username"
+                type="text"
+                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Enter username"
+                disabled
+              />
+            </div>
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Email
+            </label>
+            <div>
+              <input
+                defaultValue={currentInfo.email}
+                id="email"
+                type="email"
+                className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
+                disabled
+                placeholder="Enter email"
+              />
+            </div>
+          </div>
           <div className="mb-6">
             <label
               htmlFor="password"
@@ -114,7 +155,7 @@ const UpdateAccount = () => {
               type="submit"
               className="bg-gradient-to-r bg-blue-500 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-full"
             >
-              Register
+              Update Password
             </button>
           </div>
         </form>

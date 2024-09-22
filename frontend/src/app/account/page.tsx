@@ -1,7 +1,7 @@
 import UpdateAccount from "@/components/account/updateAccount";
 import React from "react";
 
-const Account = () => {
+const AccountPage = () => {
   return (
     <div className="container mx-auto">
       <UpdateAccount />
@@ -9,4 +9,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default AccountPage;

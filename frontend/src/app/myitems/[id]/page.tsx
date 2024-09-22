@@ -1,7 +1,10 @@
+import EditProduct from "@/components/product/editProduct";
 import React from "react";
 
-const EditProduct = () => {
-  return <div className="container mx-auto text-red-500">Edit product</div>;
+const EditProductPage = () => {
+  return <div className="container mx-auto ">
+    <EditProduct />
+  </div>;
 };
 
-export default EditProduct;
+export default EditProductPage;

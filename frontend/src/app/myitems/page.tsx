@@ -1,7 +1,7 @@
 import Inventory from "@/components/inventory/inventory";
 import React from "react";
 
-const MyItems = () => {
+const MyItemsPage = () => {
   return (
     <main className="container mx-auto">
       <Inventory />
@@ -9,4 +9,4 @@ const MyItems = () => {
   );
 };
 
-export default MyItems;
+export default MyItemsPage;
