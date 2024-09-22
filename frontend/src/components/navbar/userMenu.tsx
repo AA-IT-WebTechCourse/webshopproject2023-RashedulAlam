@@ -63,7 +63,7 @@ const UserMenu = () => {
   ];
   return (
     <div className="group relative inline-block">
-      <button className="p-2 font-semibold text-blue-600 focus:outline-none flex flex-row gap-1">
+      <button className="font-semibold text-blue-600 focus:outline-none flex flex-row gap-1">
         <span>
           <svg
             width="32"

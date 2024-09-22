@@ -72,7 +72,7 @@ const Inventory: React.FC<IInventoryProps> = () => {
                 width="32"
                 height="32"
                 stroke="white"
-                stroke-width="3"
+                strokeWidth="3"
                 className="m-2"
               >
                 <line x1="12" y1="5" x2="12" y2="19"></line>
