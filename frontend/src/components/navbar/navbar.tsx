@@ -85,7 +85,7 @@ const Navbar = () => {
                     key={i}
                     href={x.url}
                     target={x.openNewTab ? "_blank" : "_self"}
-                    className="text-base font-medium text-gray-500 hover:text-gray-900"
+                    className="text-base font-bold text-blue-500 hover:text-blue-800"
                   >
                     {x.name}
                   </Link>
