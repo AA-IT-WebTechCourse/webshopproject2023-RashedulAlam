@@ -1,17 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import withAuth from "../HOC/withAuth";
+import InventoryCard from "./inventoryCard";
+import Pagination from "../pagination/pagination";
+import { ETabNames } from "./inventory.d";
 
 interface IInventoryProps {}
 
-enum ETabNames {
-  SALE = "sale",
-  SOLD = "sold",
-  PURCHASED = "purchased",
-}
-
 const Inventory: React.FC<IInventoryProps> = () => {
   const [activeTab, setActiveTab] = useState<string>(ETabNames.SALE);
+  const products = Array(10).fill(10);
 
   const tabClass = {
     active: " bg-gray-200 hover:bg-gray-200",
@@ -56,14 +54,15 @@ const Inventory: React.FC<IInventoryProps> = () => {
           </button>
         </li>
       </ul>
-      <div className="hidden px-1 py-2" data-tabs-target="panel">
-        <h3 className="text-lg font-semibold">Profile</h3>
-      </div>
-      <div className="hidden px-1 py-2" data-tabs-target="panel">
-        <h3 className="text-lg font-semibold">Dashboard</h3>
-      </div>
-      <div className="hidden px-1 py-2" data-tabs-target="panel">
-        <h3 className="text-lg font-semibold">Settings</h3>
+      <div className="px-1 py-2 flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
+          {products.map((x, i) => (
+            <InventoryCard key={i} viewType={activeTab} />
+          ))}
+        </div>
+        <div>
+          <Pagination />
+        </div>
       </div>
     </div>
   );
