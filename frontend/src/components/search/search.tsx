@@ -1,9 +1,5 @@
 import React from "react";
-
-interface ISearchProps {
-  onSearch: (text: string) => void;
-  searchText: string;
-}
+import { ISearchProps } from "./search.d";
 
 const search: React.FC<ISearchProps> = ({ searchText, onSearch }) => {
   return (

@@ -1,12 +1,8 @@
 "use client";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { TCreateProduct } from "./product.d";
 
-type TCreateProduct = {
-  title: string;
-  price: number;
-  description: string;
-};
 
 const AddProduct = () => {
   const {

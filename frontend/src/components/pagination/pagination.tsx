@@ -1,10 +1,5 @@
 import React from "react";
-
-interface IPaginationProps {
-  totalPages: number;
-  currentPage: number;
-  onPageChange?: (nextPage: number) => void;
-}
+import { IPaginationProps } from "./pagination.d";
 
 const pagination: React.FC<IPaginationProps> = ({
   currentPage = 1,

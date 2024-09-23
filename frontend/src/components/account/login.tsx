@@ -1,15 +1,10 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAuth } from "@/contexts/authenticationContext";
 import { useRouter } from "next/navigation";
-
-type TLogin = {
-  username: string;
-  password: string;
-};
+import { TLogin } from "./account.d";
 
 const Login = () => {
   const {
@@ -23,7 +18,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<TLogin> = (data: any) => {
     setUser && setUser(data);
-    router.push('/')
+    router.push("/");
   };
 
   return (

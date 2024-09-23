@@ -1,10 +1,6 @@
 import React from "react";
 import { ViewType } from "./product.d";
 
-interface IViewToggleProps {
-  viewType: ViewType;
-  setViewType: (ViewType: ViewType) => void;
-}
 
 const viewToggle: React.FC<IViewToggleProps> = ({ viewType, setViewType }) => {
   return (

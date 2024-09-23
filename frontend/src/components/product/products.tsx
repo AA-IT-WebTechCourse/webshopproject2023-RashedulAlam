@@ -2,10 +2,6 @@ import React from "react";
 import ProductCard from "./productCard";
 import { IProductCardProps, ViewType } from "./product.d";
 
-interface IProductsProps {
-  products: IProductCardProps[];
-  viewType: ViewType;
-}
 
 const products: React.FC<IProductsProps> = ({ products, viewType }) => {
   return (

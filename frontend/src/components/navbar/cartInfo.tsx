@@ -1,9 +1,5 @@
 import React from "react";
-
-interface ICartInfoProps {
-  count: number;
-  onIconClick: () => void;
-}
+import { ICartInfoProps } from "./navbar.d";
 
 const CartInfo: React.FC<ICartInfoProps> = ({ count, onIconClick }) => {
   return (
@@ -25,7 +21,9 @@ const CartInfo: React.FC<ICartInfoProps> = ({ count, onIconClick }) => {
           <circle cx="20" cy="21" r="1"></circle>
           <path d="M1 1h4l2.68 13.39a1 1 0 0 0 1 .61h9.72a1 1 0 0 0 1-.76l3.38-9.49H5.52"></path>
         </svg>
-        <span className="text-white font-semibold text-xs absolute right-0 top-0 animate-bounce h-4 w-4 bg-blue-500 rounded-full">{count}</span>
+        <span className="text-white font-semibold text-xs absolute right-0 top-0 animate-bounce h-4 w-4 bg-blue-500 rounded-full">
+          {count}
+        </span>
       </button>
     </div>
   );

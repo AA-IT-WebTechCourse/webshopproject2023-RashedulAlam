@@ -1,19 +1,7 @@
 "use client";
 import React from "react";
-import { ETabNames } from "./inventory.d";
+import { ETabNames, IInventoryCardProps } from "./inventory.d";
 import { useRouter } from "next/navigation";
-
-interface IInventoryCardProps {
-  title: string;
-  description: string;
-  price: number;
-  created_by: string;
-  purchased_by?: string;
-  purchased_at?: string;
-  created_at: string;
-  viewType: ETabNames;
-  id: string;
-}
 
 const InventoryCard: React.FC<IInventoryCardProps> = ({ viewType }) => {
   const router = useRouter();

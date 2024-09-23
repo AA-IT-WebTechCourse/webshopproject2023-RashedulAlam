@@ -2,20 +2,15 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-type TCreateProduct = {
-  title: string;
-  price: number;
-  description: string;
-};
 
 const EditProduct = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TCreateProduct>();
+  } = useForm<TUpdateProduct>();
 
-  const onSubmit: SubmitHandler<TCreateProduct> = (data) => {
+  const onSubmit: SubmitHandler<TUpdateProduct> = (data) => {
     console.log(errors);
     console.log(data);
   };

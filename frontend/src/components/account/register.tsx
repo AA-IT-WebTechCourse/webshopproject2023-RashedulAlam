@@ -2,13 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-type TRegisterUser = {
-  username: string;
-  password: string;
-  confirmPassword: string;
-  email: string;
-};
+import { TRegisterUser } from "./account.d";
 
 const Register = () => {
   const {
@@ -121,7 +115,7 @@ const Register = () => {
                 Confirm Password is required
               </p>
             )}
-            {errors.confirmPassword?.message  && (
+            {errors.confirmPassword?.message && (
               <p role="alert" className="text-red-600 font-semibold mt-2">
                 Passwords do not match
               </p>
@@ -138,7 +132,10 @@ const Register = () => {
         </form>
         <p className="text-center text-gray-600 mt-6">
           Already have an account?
-          <Link href="/login" className="text-blue-500 hover:underline ml-2 font-semibold">
+          <Link
+            href="/login"
+            className="text-blue-500 hover:underline ml-2 font-semibold"
+          >
             Sign in
           </Link>
         </p>

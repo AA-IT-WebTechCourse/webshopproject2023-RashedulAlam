@@ -1,18 +1,7 @@
 "use client";
-import Link from "next/link";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
-interface IUserAccount {
-  username: string;
-  email: string;
-}
-
-type TUpdateUserAccount = {
-  password: string;
-  newPassword: string;
-  newConfirmPassword: string;
-};
+import { TUpdateUserAccount } from "./account.d";
 
 const UpdateAccount = () => {
   const {

@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import withAuth from "../HOC/withAuth";
 import InventoryCard from "./inventoryCard";
 import Pagination from "../pagination/pagination";
-import { ETabNames } from "./inventory.d";
+import { ETabNames, IInventoryProps } from "./inventory.d";
 import { useRouter } from "next/navigation";
-
-interface IInventoryProps {}
 
 const Inventory: React.FC<IInventoryProps> = () => {
   const [activeTab, setActiveTab] = useState<string>(ETabNames.SALE);

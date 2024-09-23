@@ -5,17 +5,7 @@ import React, {
   useContext,
   PropsWithChildren,
 } from "react";
-
-interface IUser {
-  username?: string;
-  email?: string;
-  token?: string;
-}
-
-interface IUserConext {
-  user?: IUser | null;
-  setUser?: (user: any) => void;
-}
+import { IUser, IUserConext } from "./authenticationContext.d";
 
 const AuthenticationContext = createContext<IUserConext>({});
 
