@@ -82,11 +82,12 @@ const Inventory: React.FC<IInventoryProps> = () => {
         )}
         <div className="flex flex-col gap-4">
           {products.map((x, i) => (
-            <InventoryCard key={i} viewType={activeTab} />
+            // <InventoryCard key={i} viewType={activeTab} />
+            <></>
           ))}
         </div>
         <div>
-          <Pagination />
+          {/* <Pagination /> */}
         </div>
       </div>
     </div>
