@@ -22,13 +22,13 @@ const PopulateDb = () => {
     <div className="flex flex-col items-center gap-6 w-full">
       <p className="text-red-400 text-sm font-semibold">{label}</p>
       <button
-        className="bg-blue-600 w-fit h-fit p-3 rounded flex gap-2 justify-between items-center"
+        className="bg-blue-600 w-fit h-fit p-3 rounded flex gap-2 justify-between items-center relative"
         disabled={loading}
         onClick={() => onClickHandler()}
       >
         {loading && (
           <svg
-            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            className="animate-spin h-5 w-5 text-white absolute z-10 left-[45%]"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

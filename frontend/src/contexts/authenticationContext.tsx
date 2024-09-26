@@ -5,7 +5,7 @@ import React, {
   useContext,
   PropsWithChildren,
 } from "react";
-import { IUser, IUserConext } from "./authenticationContext.d";
+import { IUser, IUserConext } from "./contexts.d";
 
 const AuthenticationContext = createContext<IUserConext>({});
 

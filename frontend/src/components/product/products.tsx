@@ -1,13 +1,23 @@
 import React from "react";
 import ProductCard from "./productCard";
-import { IProductCardProps, ViewType } from "./product.d";
+import { IProductsProps } from "./product.d";
 
-
-const products: React.FC<IProductsProps> = ({ products, viewType }) => {
+const products: React.FC<IProductsProps> = ({
+  products,
+  viewType,
+  addToCart,
+  removeFromCart,
+}) => {
   return (
     <div className="flex flex-row gap-4 flex-wrap justify-between">
-      {products.map((_i, x) => (
-        <ProductCard key={x} viewType={viewType} />
+      {products.map((x, i) => (
+        <ProductCard
+          key={i}
+          viewType={viewType}
+          product={x}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+        />
       ))}
     </div>
   );

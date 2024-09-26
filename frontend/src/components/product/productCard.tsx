@@ -1,44 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import { IProductCardProps, ViewType } from "./product.d";
+import { IProduct } from "@/contexts/contexts.d";
 
 const ProductCard = ({
-  description,
-  price,
-  title,
-  created_at,
+  product,
   viewType = ViewType.LIST_VIEW,
+  addToCart,
+  removeFromCart,
 }: IProductCardProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const addToCartHandler = (product: IProduct) => {
+    setLoading(true);
+    addToCart && addToCart(product);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  };
+
+  const { created_at, description, id, owner, price, title } = product;
+
   return (
     <>
       {viewType === ViewType.GRID_VIEW && (
         <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
           <div className="px-4 py-3 w-72">
             <p className="text-white text-xs w-fit p-1 rounded-md bg-yellow-500">
-              Seller: ralam
+              Seller: {owner}
             </p>
             <p className="text-lg font-bold text-blue-600 truncate block capitalize">
-              Product Title
+              {title}
             </p>
-            <div className="text-gray-400 text-xs py-2">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged.
-            </div>
+            <div className="text-gray-400 text-xs py-2">{description}</div>
             <p className="text-white text-xs w-fit p-1 rounded-md bg-green-500">
-              Published: 2012-12-12 10 am
+              Published: {created_at}
             </p>
             <div className="flex items-center">
               <p className="text-lg font-semibold text-blue-400 cursor-auto my-3">
-                $149
+                ${price.toFixed(2)}
               </p>
               <button
-                className="ml-auto"
+                className="ml-auto relative"
                 aria-label="add to cart"
+                onClick={() => addToCartHandler(product)}
+                disabled={loading}
                 type="button"
               >
+                {loading && (
+                  <svg
+                    className="animate-spin h-8 w-8 text-white absolute z-10 -top-1.5 -left-1.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="gray"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                )}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -62,19 +91,19 @@ const ProductCard = ({
           <div className="flex">
             <div className="px-4 py-3 w-fit flex flex-col justify-start gap-1">
               <p className="text-white text-xs w-fit p-1 rounded-md bg-yellow-500">
-                Seller: ralam
+                Seller: {owner}
               </p>
               <p className="text-lg font-bold text-blue-800 truncate block capitalize">
-                Product Title
+                {title}
               </p>
               <div className="flex flex-row gap-2">
                 <p className="text-white text-xs w-fit p-1 rounded-md bg-green-500">
-                  Published Date: 2012-12-12 10 am
+                  Published Date: {created_at}
                 </p>
               </div>
               <div className="flex items-center mt-10">
                 <p className="text-lg font-semibold text-blue-400 cursor-auto">
-                  $149
+                  ${price.toFixed(2)}
                 </p>
                 <button
                   className="ml-auto"
@@ -99,14 +128,7 @@ const ProductCard = ({
             </div>
           </div>
           <div className="flex max-w-96 px-4 py-3">
-            <div className="text-gray-400 text-xs">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged.
-            </div>
+            <div className="text-gray-400 text-xs">{description}</div>
           </div>
         </div>
       )}
