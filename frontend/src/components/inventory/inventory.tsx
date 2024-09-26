@@ -7,7 +7,7 @@ import { ETabNames, IInventoryProps } from "./inventory.d";
 import { useRouter } from "next/navigation";
 
 const Inventory: React.FC<IInventoryProps> = () => {
-  const [activeTab, setActiveTab] = useState<string>(ETabNames.SALE);
+  const [activeTab, setActiveTab] = useState<ETabNames>(ETabNames.SALE);
   const products = Array(10).fill(10);
   const router = useRouter();
 

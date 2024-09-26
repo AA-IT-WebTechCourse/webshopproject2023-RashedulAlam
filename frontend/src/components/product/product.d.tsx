@@ -1,10 +1,17 @@
+import { IProduct } from "@/contexts/contexts.d";
+
 export interface IProductCardProps {
-  title: string;
-  description: string;
-  price: number;
-  tag: string;
-  created_at?: string;
   viewType: ViewType;
+  product: IProduct;
+  addToCart?: (product: IProduct) => void;
+  removeFromCart?: (id: string) => void;
+}
+
+export interface IProductsProps {
+  products: IProduct[];
+  viewType: ViewType;
+  addToCart?: (product: IProduct) => void;
+  removeFromCart?: (id: string) => void;
 }
 
 export enum ViewType {
@@ -25,7 +32,7 @@ export type TUpdateProduct = {
 };
 
 export interface IProductsProps {
-  products: IProductCardProps[];
+  products: IProduct[];
   viewType: ViewType;
 }
 

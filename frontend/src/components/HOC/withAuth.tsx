@@ -1,10 +1,11 @@
-"use client";
 import { useAuth } from "@/contexts/authenticationContext";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, ComponentType } from "react";
 
-const withAuth = (WrappedComponent) => {
-  const Wrapper = (props) => {
+type WithAuthProps = {};
+
+function withAuth<P extends object>(WrappedComponent: ComponentType<P>) {
+  const Wrapper: React.FC<P & WithAuthProps> = (props) => {
     const { user } = useAuth();
     const router = useRouter();
 
@@ -18,6 +19,6 @@ const withAuth = (WrappedComponent) => {
   };
 
   return Wrapper;
-};
+}
 
 export default withAuth;

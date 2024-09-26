@@ -6,18 +6,20 @@ import React from "react";
 import UserMenu from "./userMenu";
 import CartInfo from "./cartInfo";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/contexts/cartContext";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const { user } = useAuth();
   const router = useRouter();
+  const { products } = useCart();
 
   const nagivateToCartDetails = () => {
     router.push("/cart");
   };
 
   const cartInfoProps = {
-    count: 1,
+    count: products.length,
     onIconClick: nagivateToCartDetails,
   };
 
