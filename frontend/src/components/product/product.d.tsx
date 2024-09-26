@@ -32,7 +32,7 @@ export type TUpdateProduct = {
 };
 
 export interface IProductsProps {
-  products: IProductCardProps[];
+  products: IProduct[];
   viewType: ViewType;
 }
 
