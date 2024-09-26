@@ -1,12 +1,12 @@
 export interface IUser {
-  username?: string;
-  email?: string;
-  token?: string;
+  username?: string | null;
+  token?: string | null;
 }
 
 export interface IUserConext {
   user?: IUser | null;
-  setUser?: (user: any) => void;
+  setUserLoggedIn?: (user: any) => void;
+  isLoggedIn?: boolean;
 }
 
 export interface IProduct {

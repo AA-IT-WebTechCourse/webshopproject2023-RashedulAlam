@@ -15,3 +15,7 @@ export type TUpdateUserAccount = {
   newPassword: string;
   newConfirmPassword: string;
 };
+
+export interface ILoginResponse {
+  access: string;
+}

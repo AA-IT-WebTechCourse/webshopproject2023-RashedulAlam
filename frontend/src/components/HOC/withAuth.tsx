@@ -6,14 +6,14 @@ type WithAuthProps = {};
 
 function withAuth<P extends object>(WrappedComponent: ComponentType<P>) {
   const Wrapper: React.FC<P & WithAuthProps> = (props) => {
-    const { user } = useAuth();
+    const { isLoggedIn } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
-      if (!user) {
-        // router.push("/login");
+      if (!isLoggedIn) {
+        router.push("/login");
       }
-    }, [user, router]);
+    }, [isLoggedIn]);
 
     return <WrappedComponent {...props} />;
   };

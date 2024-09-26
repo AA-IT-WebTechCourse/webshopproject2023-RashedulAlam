@@ -1,10 +1,12 @@
 import { useAuth } from "@/contexts/authenticationContext";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { IUserMenuProps } from "./navbar.d";
 
-const UserMenu = () => {
-  const { setUser } = useAuth();
+const UserMenu: React.FC<IUserMenuProps> = ({ user }) => {
   const router = useRouter();
+
+  const isLoggedIn = !!user;
 
   const navigationHandler = (url?: string, isLogOutMenu?: boolean) => {
     if (isLogOutMenu) {
@@ -75,7 +77,7 @@ const UserMenu = () => {
             <path d="M5.5 21a9.5 9.5 0 0 1 13 0"></path>
           </svg>
         </span>
-        <span>ralam</span>
+        <span>{user?.username}</span>
       </button>
       <ul className="hidden group-focus-within:block list-none absolute bg-gray-50 w-40 z-1 shadow-lg animate-slideIn">
         {userMenus.map((x, i) => (

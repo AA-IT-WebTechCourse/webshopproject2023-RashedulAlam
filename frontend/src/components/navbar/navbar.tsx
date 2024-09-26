@@ -10,7 +10,7 @@ import { useCart } from "@/contexts/cartContext";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const { user } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const router = useRouter();
   const { products } = useCart();
 
@@ -28,7 +28,7 @@ const Navbar = () => {
       name: "Database Population",
       url: "/db-population",
     },
-    ...(true
+    ...(isLoggedIn
       ? [
           {
             name: "Inventory",
@@ -95,22 +95,24 @@ const Navbar = () => {
               })}
             </nav>
 
-            <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-              <Link
-                href="/login"
-                className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Sign in
-              </Link>
-              <Link
-                href="/signup"
-                className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-              >
-                Sign up
-              </Link>
-            </div>
-            <CartInfo {...cartInfoProps} />
-            <UserMenu />
+            {!isLoggedIn && (
+              <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                <Link
+                  href="/login"
+                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/signup"
+                  className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                >
+                  Sign up
+                </Link>
+              </div>
+            )}
+            {isLoggedIn && <CartInfo {...cartInfoProps} />}
+            {isLoggedIn && <UserMenu user={user} />}
           </div>
         </div>
 

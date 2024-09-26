@@ -6,14 +6,27 @@ import React, {
   PropsWithChildren,
 } from "react";
 import { ICartContext, IProduct } from "./contexts.d";
+import config from "@/config/config";
 
 const CartContext = createContext<ICartContext>({ products: [] });
 
 export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const initialState: IProduct[] =
+    typeof window !== "undefined" &&
+    localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS)
+      ? JSON.parse(
+          localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS) ?? "[]"
+        )
+      : [];
+
+  const [products, setProducts] = useState<IProduct[]>(initialState);
 
   const addProductHandler = (product: IProduct) => {
-    setProducts([...products, product]);
+    setProducts((x: IProduct[]) => {
+      return [...x, product];
+    });
+
+    updateLocalStorage();
   };
 
   const removeProductHandler = (id: string) => {
@@ -21,6 +34,19 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
       const filteredProducts = x.filter((x) => x.id !== id);
 
       return filteredProducts;
+    });
+
+    updateLocalStorage();
+  };
+
+  const updateLocalStorage = () => {
+    setTimeout(() => {
+      if (typeof window !== "undefined") {
+        localStorage.setItem(
+          config.LOCAL_STORAGE.CART.PRODUCTS,
+          JSON.stringify(products)
+        );
+      }
     });
   };
 

@@ -4,7 +4,9 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAuth } from "@/contexts/authenticationContext";
 import { useRouter } from "next/navigation";
-import { TLogin } from "./account.d";
+import { ILoginResponse, TLogin } from "./account.d";
+import instance from "@/libs/utils/api";
+import { AxiosResponse } from "axios";
 
 const Login = () => {
   const {
@@ -13,12 +15,21 @@ const Login = () => {
     formState: { errors },
   } = useForm<TLogin>();
 
-  const { user, setUser } = useAuth();
+  const { setUserLoggedIn } = useAuth();
   const router = useRouter();
 
   const onSubmit: SubmitHandler<TLogin> = (data: any) => {
-    setUser && setUser(data);
-    router.push("/");
+    instance
+      .post<TLogin,AxiosResponse<ILoginResponse>>("api/v1/core/token/", data)
+      .then((response) => {
+        if (response.status == 200) {
+          setUserLoggedIn &&
+            setUserLoggedIn({
+              username: data.username,
+              token: response.data.access,
+            });
+        }
+      });
   };
 
   return (
