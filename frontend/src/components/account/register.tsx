@@ -3,18 +3,52 @@ import Link from "next/link";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TRegisterUser } from "./account.d";
+import instance from "@/libs/utils/api";
+import { AxiosResponse } from "axios";
+import { useRouter } from "next/navigation";
+import config from "@/config/config";
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors },
   } = useForm<TRegisterUser>();
 
-  const onSubmit: SubmitHandler<TRegisterUser> = (data) => {
-    console.log(errors);
-    console.log(data);
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<TRegisterUser> = (data: TRegisterUser) => {
+    instance
+      .post<TRegisterUser, AxiosResponse<TRegisterUser>>(
+        config.API_URLS.AUTH.REGISTER,
+        data
+      )
+      .then(
+        (response) => {
+          if (response.status == 201) {
+            router.push("/login");
+          }
+        },
+        (error) => {
+          if (error?.response?.data) {
+            const errorData = error.response.data;
+
+            Object.keys(errorData).forEach((currentValue: any) => {
+              setError(currentValue, {
+                type: "required",
+                message: errorData[currentValue][0],
+              });
+            });
+          } else {
+            setError("root.serverError", {
+              type: "400",
+              message: '"Invalid user registration"',
+            });
+          }
+        }
+      );
   };
 
   return (
@@ -23,7 +57,13 @@ const Register = () => {
         <h2 className="text-3xl font-bold mb-6 text-center ">
           <span className="text-blue-500 bg-clip-text">Register</span>
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(onSubmit)(e);
+          }}
+          noValidate
+        >
           <div className="mb-6">
             <label
               htmlFor="username"
@@ -42,7 +82,7 @@ const Register = () => {
             </div>
             {errors.username?.type === "required" && (
               <p role="alert" className="text-red-600 font-semibold mt-2">
-                Username is required
+                {errors.username.message}
               </p>
             )}
           </div>
@@ -64,7 +104,7 @@ const Register = () => {
             </div>
             {errors.email?.type === "required" && (
               <p role="alert" className="text-red-600 font-semibold mt-2">
-                Email is required
+                {errors.email.message}
               </p>
             )}
           </div>
@@ -121,6 +161,13 @@ const Register = () => {
               </p>
             )}
           </div>
+          {errors?.root?.serverError && (
+            <div className="flex">
+              <p role="alert" className="text-red-600 font-semibold mt-2">
+                {errors?.root?.serverError?.message}
+              </p>
+            </div>
+          )}
           <div className="flex items-center justify-center mt-8">
             <button
               type="submit"

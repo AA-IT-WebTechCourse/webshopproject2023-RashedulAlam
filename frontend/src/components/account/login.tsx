@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { ILoginResponse, TLogin } from "./account.d";
 import instance from "@/libs/utils/api";
 import { AxiosResponse } from "axios";
+import config from "@/config/config";
 
 const Login = () => {
   const {
@@ -21,7 +22,10 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<TLogin> = (data: TLogin) => {
     instance
-      .post<TLogin, AxiosResponse<ILoginResponse>>("api/v1/core/token/", data)
+      .post<TLogin, AxiosResponse<ILoginResponse>>(
+        config.API_URLS.AUTH.LOGIN,
+        data
+      )
       .then(
         (response) => {
           if (response.status == 200) {
