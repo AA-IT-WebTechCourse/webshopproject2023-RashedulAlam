@@ -12,25 +12,38 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<TLogin>();
 
   const { setUserLoggedIn } = useAuth();
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<TLogin> = (data: any) => {
+  const onSubmit: SubmitHandler<TLogin> = (data: TLogin) => {
     instance
       .post<TLogin, AxiosResponse<ILoginResponse>>("api/v1/core/token/", data)
-      .then((response) => {
-        if (response.status == 200) {
-          setUserLoggedIn &&
-            setUserLoggedIn({
-              username: data.username,
-              token: response.data.access,
-            });
-          router.push("/");
+      .then(
+        (response) => {
+          if (response.status == 200) {
+            setUserLoggedIn &&
+              setUserLoggedIn({
+                username: data.username,
+                token: response.data.access,
+              });
+            router.push("/");
+          }
+        },
+        (error) => {
+          let message = "Invalid login attempt";
+          if (error?.response?.data?.detail) {
+            message = error?.response?.data?.detail;
+          }
+          setError("root.serverError", {
+            type: "400",
+            message: message,
+          });
         }
-      });
+      );
   };
 
   return (
@@ -39,7 +52,13 @@ const Login = () => {
         <h2 className="text-3xl font-bold mb-6 text-center">
           <span className="text-blue-500 bg-clip-text">Log In</span>
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(onSubmit)(e);
+          }}
+          noValidate
+        >
           <div className="mb-6">
             <label
               htmlFor="username"
@@ -84,6 +103,15 @@ const Login = () => {
               </p>
             )}
           </div>
+
+          {errors?.root?.serverError && (
+            <div className="flex">
+              <p role="alert" className="text-red-600 font-semibold mt-2">
+                {errors?.root?.serverError?.message}
+              </p>
+            </div>
+          )}
+
           <div className="flex items-center justify-center">
             <button
               type="submit"

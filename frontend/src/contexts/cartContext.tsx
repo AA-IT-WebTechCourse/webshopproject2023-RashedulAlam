@@ -17,23 +17,23 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const addProductHandler = (product: IProduct) => {
     setProducts((x: IProduct[]) => {
-      return [...x, product];
-    });
+      const updatedProducts = [...x, product];
+      updateLocalStorage(updatedProducts);
 
-    updateLocalStorage();
+      return updatedProducts;
+    });
   };
 
   const removeProductHandler = (id: string) => {
     setProducts((x) => {
       const filteredProducts = x.filter((x) => x.id !== id);
+      updateLocalStorage(filteredProducts);
 
       return filteredProducts;
     });
-
-    updateLocalStorage();
   };
 
-  const updateLocalStorage = () => {
+  const updateLocalStorage = (products: IProduct[]) => {
     setTimeout(() => {
       if (typeof window !== "undefined") {
         localStorage.setItem(
