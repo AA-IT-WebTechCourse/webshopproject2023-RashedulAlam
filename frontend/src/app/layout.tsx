@@ -5,6 +5,9 @@ import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import { AuthenticationProvider } from "@/contexts/authenticationContext";
 import { CartProvider } from "@/contexts/cartContext";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +30,18 @@ export default function RootLayout({
             {children}
             <Footer />
           </CartProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </AuthenticationProvider>
       </body>
     </html>

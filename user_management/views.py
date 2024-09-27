@@ -22,3 +22,13 @@ class ChangePasswordView(generics.GenericAPIView):
             return Response({"detail": "Password updated successfully."}, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CurrentUserDetailsView(generics.RetrieveAPIView):
+    """
+    Retrieve the details of the currently authenticated user.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        return self.request.user

@@ -7,6 +7,24 @@ const config = {
       PRODUCTS: "products",
     },
   },
+  API_URLS: {
+    AUTH: {
+      LOGIN: "api/v1/core/token/",
+      REGISTER: "api/v1/user-management/register/",
+    },
+    PRODUCT: {
+      PRODUCTS: "",
+      PRODUCT: "",
+      ADD_PRODUCT: "",
+      REMOVE_PRODUCT: "",
+      UPDATE_PRODUCT: "",
+    },
+    INVENTORY: {
+      SALE: "",
+      SOLD: "",
+      PURCHASED: "",
+    },
+  },
 };
 
 export default config;

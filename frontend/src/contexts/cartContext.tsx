@@ -4,42 +4,41 @@ import React, {
   useState,
   useContext,
   PropsWithChildren,
+  useEffect,
 } from "react";
 import { ICartContext, IProduct } from "./contexts.d";
 import config from "@/config/config";
+import { toast } from "react-toastify";
 
 const CartContext = createContext<ICartContext>({ products: [] });
 
 export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const initialState: IProduct[] =
-    typeof window !== "undefined" &&
-    localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS)
-      ? JSON.parse(
-          localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS) ?? "[]"
-        )
-      : [];
-
-  const [products, setProducts] = useState<IProduct[]>(initialState);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const addProductHandler = (product: IProduct) => {
     setProducts((x: IProduct[]) => {
-      return [...x, product];
+      const updatedProducts = [...x, product];
+      updateLocalStorage(updatedProducts);
+
+      return updatedProducts;
     });
 
-    updateLocalStorage();
+    toast.success(`${product.title} has been added to your cart!`);
   };
 
-  const removeProductHandler = (id: string) => {
+  const removeProductHandler = (product: IProduct) => {
     setProducts((x) => {
-      const filteredProducts = x.filter((x) => x.id !== id);
+      const filteredProducts = x.filter((x) => x.id !== product.id);
+      updateLocalStorage(filteredProducts);
 
       return filteredProducts;
     });
 
-    updateLocalStorage();
+    toast.warning(`${product.title} has been removed from your cart!`);
   };
 
-  const updateLocalStorage = () => {
+  const updateLocalStorage = (products: IProduct[]) => {
     setTimeout(() => {
       if (typeof window !== "undefined") {
         localStorage.setItem(
@@ -50,14 +49,40 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
     });
   };
 
+  const isExistsOnCart = (product: IProduct) => {
+    return !!products.find((x) => x.id === product.id);
+  };
+
   const contextvalue = {
     products,
     addToCart: addProductHandler,
     removeFromCart: removeProductHandler,
+    isExistsOnCart: isExistsOnCart,
   };
 
+  useEffect(() => {
+    const initialState: IProduct[] =
+      typeof window !== "undefined" &&
+      localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS)
+        ? JSON.parse(
+            localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS) ?? "[]"
+          )
+        : [];
+
+    setProducts(initialState);
+    setLoading(false);
+  }, [setProducts]);
+
   return (
-    <CartContext.Provider value={contextvalue}>{children}</CartContext.Provider>
+    <>
+      {loading ? (
+        <></>
+      ) : (
+        <CartContext.Provider value={contextvalue}>
+          {children}
+        </CartContext.Provider>
+      )}
+    </>
   );
 };
 

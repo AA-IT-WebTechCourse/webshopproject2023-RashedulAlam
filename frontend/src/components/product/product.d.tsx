@@ -4,14 +4,18 @@ export interface IProductCardProps {
   viewType: ViewType;
   product: IProduct;
   addToCart?: (product: IProduct) => void;
-  removeFromCart?: (id: string) => void;
+  removeFromCart?: (product: IProduct) => void;
+  showActionButton: boolean;
+  isExistsOnCart?: (product: IProduct) => boolean;
 }
 
 export interface IProductsProps {
   products: IProduct[];
   viewType: ViewType;
   addToCart?: (product: IProduct) => void;
-  removeFromCart?: (id: string) => void;
+  removeFromCart?: (product: IProduct) => void;
+  showActionButton: boolean;
+  isExistsOnCart?: (product: IProduct) => boolean;
 }
 
 export enum ViewType {
@@ -30,11 +34,6 @@ export type TUpdateProduct = {
   price: number;
   description: string;
 };
-
-export interface IProductsProps {
-  products: IProduct[];
-  viewType: ViewType;
-}
 
 export interface IViewToggleProps {
   viewType: ViewType;

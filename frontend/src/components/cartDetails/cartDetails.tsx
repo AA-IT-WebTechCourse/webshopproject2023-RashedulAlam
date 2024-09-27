@@ -45,7 +45,7 @@ const CartDetails = () => {
                 {x.title}
                 <button
                   className="text-xs font-semibold text-red-600"
-                  onClick={() => removeFromCart && removeFromCart(x.id)}
+                  onClick={() => removeFromCart && removeFromCart(x)}
                 >
                   Remove
                 </button>

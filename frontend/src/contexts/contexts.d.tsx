@@ -7,6 +7,7 @@ export interface IUserConext {
   user?: IUser | null;
   setUserLoggedIn?: (user: any) => void;
   isLoggedIn?: boolean;
+  logoutUser?: () => void;
 }
 
 export interface IProduct {
@@ -21,5 +22,6 @@ export interface IProduct {
 export interface ICartContext {
   products: IProduct[];
   addToCart?: (product: IProduct) => void;
-  removeFromCart?: (id: string) => void;
+  removeFromCart?: (product: IProduct) => void;
+  isExistsOnCart?: (product: IProduct) => boolean;
 }

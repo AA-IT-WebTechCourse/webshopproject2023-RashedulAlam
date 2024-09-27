@@ -1,16 +1,16 @@
 "use client";
 import { useAuth } from "@/contexts/authenticationContext";
-import { url } from "inspector";
 import Link from "next/link";
 import React from "react";
 import UserMenu from "./userMenu";
 import CartInfo from "./cartInfo";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/cartContext";
+import { IUserMenuProps } from "./navbar.d";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user, logoutUser } = useAuth();
   const router = useRouter();
   const { products } = useCart();
 
@@ -42,6 +42,20 @@ const Navbar = () => {
       url: "https://github.com/AA-IT-WebTechCourse/webshopproject2023-RashedulAlam",
     },
   ];
+
+  const accountSettingHandler = () => {
+    router.push("/account");
+  };
+
+  const logoutHandler = () => {
+    logoutUser && logoutUser();
+  };
+
+  const userMenuProps: IUserMenuProps = {
+    user: user,
+    logoutHandler: logoutHandler,
+    accountSettingHandler: accountSettingHandler,
+  };
 
   return (
     <>
@@ -112,7 +126,7 @@ const Navbar = () => {
               </div>
             )}
             {isLoggedIn && <CartInfo {...cartInfoProps} />}
-            {isLoggedIn && <UserMenu user={user} />}
+            {isLoggedIn && <UserMenu {...userMenuProps} />}
           </div>
         </div>
 
