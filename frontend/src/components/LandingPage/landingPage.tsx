@@ -19,7 +19,7 @@ const LandingPage = () => {
   const [viewType, setViewType] = useState<ViewType>(ViewType.GRID_VIEW);
   const [searchText, setSearchText] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const { addToCart, removeFromCart } = useCart();
+  const { addToCart, removeFromCart, isExistsOnCart } = useCart();
   const { isLoggedIn } = useAuth();
   const productProps: IProductsProps = {
     products: mockProducts,
@@ -27,6 +27,7 @@ const LandingPage = () => {
     addToCart: addToCart,
     removeFromCart: removeFromCart,
     showActionButton: !!isLoggedIn,
+    isExistsOnCart: isExistsOnCart,
   };
   const paginationProps: IPaginationProps = {
     currentPage: 1,

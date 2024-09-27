@@ -23,4 +23,5 @@ export interface ICartContext {
   products: IProduct[];
   addToCart?: (product: IProduct) => void;
   removeFromCart?: (product: IProduct) => void;
+  isExistsOnCart?: (product: IProduct) => boolean;
 }

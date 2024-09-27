@@ -2,24 +2,37 @@ import React, { useState } from "react";
 import { IProductCardProps, ViewType } from "./product.d";
 import { IProduct } from "@/contexts/contexts.d";
 
+enum EEventType {
+  ADD = "ADD",
+  REMOVE = "REMOVE",
+}
+
 const ProductCard = ({
   product,
   viewType = ViewType.LIST_VIEW,
   addToCart,
   removeFromCart,
   showActionButton,
+  isExistsOnCart,
 }: IProductCardProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const addToCartHandler = (product: IProduct) => {
+  const addToCartHandler = (type: EEventType, product: IProduct) => {
     setLoading(true);
-    addToCart && addToCart(product);
+    if (type == EEventType.ADD) {
+      addToCart && addToCart(product);
+    } else {
+      removeFromCart && removeFromCart(product);
+    }
+
     setTimeout(() => {
       setLoading(false);
     }, 5000);
   };
 
   const { created_at, description, id, owner, price, title } = product;
+  const isExist = isExistsOnCart && isExistsOnCart(product);
+  const eventType = isExist ? EEventType.REMOVE : EEventType.ADD;
 
   return (
     <>
@@ -44,7 +57,7 @@ const ProductCard = ({
                 <button
                   className="ml-auto relative"
                   aria-label="add to cart"
-                  onClick={() => addToCartHandler(product)}
+                  onClick={() => addToCartHandler(eventType, product)}
                   disabled={loading}
                   type="button"
                 >
@@ -70,19 +83,40 @@ const ProductCard = ({
                       ></path>
                     </svg>
                   )}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    className="fill-black"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
-                    />
-                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                  </svg>
+                  {isExist ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="black"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-5 w-5"
+                    >
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                      <line x1="12" y1="10" x2="18" y2="10"></line>
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="black"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-5 w-5"
+                    >
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                      <line x1="12" y1="9" x2="12" y2="15"></line>
+                      <line x1="9" y1="12" x2="15" y2="12"></line>
+                    </svg>
+                  )}
                 </button>
               )}
             </div>
@@ -113,7 +147,7 @@ const ProductCard = ({
                     className="ml-auto relative"
                     aria-label="add to cart"
                     type="button"
-                    onClick={() => addToCartHandler(product)}
+                    onClick={() => addToCartHandler(eventType, product)}
                   >
                     {loading && (
                       <svg
@@ -137,19 +171,40 @@ const ProductCard = ({
                         ></path>
                       </svg>
                     )}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      className="fill-black"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
-                      />
-                      <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                    </svg>
+                    {isExist ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="black"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="h-5 w-5"
+                      >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        <line x1="12" y1="10" x2="18" y2="10"></line>
+                      </svg>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="black"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="h-5 w-5"
+                      >
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        <line x1="12" y1="9" x2="12" y2="15"></line>
+                        <line x1="9" y1="12" x2="15" y2="12"></line>
+                      </svg>
+                    )}
                   </button>
                 )}
               </div>

@@ -8,12 +8,14 @@ const products: React.FC<IProductsProps> = ({
   addToCart,
   removeFromCart,
   showActionButton,
+  isExistsOnCart,
 }) => {
   const productCardProps = {
     viewType: viewType,
     addToCart: addToCart,
     removeFromCart: removeFromCart,
     showActionButton: showActionButton,
+    isExistsOnCart: isExistsOnCart,
   };
   return (
     <div className="flex flex-row gap-4 flex-wrap justify-between">

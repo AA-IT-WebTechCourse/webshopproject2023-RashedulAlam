@@ -49,10 +49,15 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
     });
   };
 
+  const isExistsOnCart = (product: IProduct) => {
+    return !!products.find((x) => x.id === product.id);
+  };
+
   const contextvalue = {
     products,
     addToCart: addProductHandler,
     removeFromCart: removeProductHandler,
+    isExistsOnCart: isExistsOnCart,
   };
 
   useEffect(() => {
