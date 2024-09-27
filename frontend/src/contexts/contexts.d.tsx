@@ -22,5 +22,5 @@ export interface IProduct {
 export interface ICartContext {
   products: IProduct[];
   addToCart?: (product: IProduct) => void;
-  removeFromCart?: (id: string) => void;
+  removeFromCart?: (product: IProduct) => void;
 }

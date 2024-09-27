@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { ICartContext, IProduct } from "./contexts.d";
 import config from "@/config/config";
+import { toast } from "react-toastify";
 
 const CartContext = createContext<ICartContext>({ products: [] });
 
@@ -22,15 +23,19 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
       return updatedProducts;
     });
+
+    toast.success(`${product.title} has been added to your cart!`);
   };
 
-  const removeProductHandler = (id: string) => {
+  const removeProductHandler = (product: IProduct) => {
     setProducts((x) => {
-      const filteredProducts = x.filter((x) => x.id !== id);
+      const filteredProducts = x.filter((x) => x.id !== product.id);
       updateLocalStorage(filteredProducts);
 
       return filteredProducts;
     });
+
+    toast.warning(`${product.title} has been removed from your cart!`);
   };
 
   const updateLocalStorage = (products: IProduct[]) => {

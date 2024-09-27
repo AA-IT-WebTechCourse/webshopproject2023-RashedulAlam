@@ -4,7 +4,7 @@ export interface IProductCardProps {
   viewType: ViewType;
   product: IProduct;
   addToCart?: (product: IProduct) => void;
-  removeFromCart?: (id: string) => void;
+  removeFromCart?: (product: IProduct) => void;
   showActionButton: boolean;
 }
 
@@ -12,7 +12,7 @@ export interface IProductsProps {
   products: IProduct[];
   viewType: ViewType;
   addToCart?: (product: IProduct) => void;
-  removeFromCart?: (id: string) => void;
+  removeFromCart?: (product: IProduct) => void;
   showActionButton: boolean;
 }
 
