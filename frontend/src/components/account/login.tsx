@@ -8,6 +8,7 @@ import { ILoginResponse, TLogin } from "./account.d";
 import instance from "@/libs/utils/api";
 import { AxiosResponse } from "axios";
 import config from "@/config/config";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -34,6 +35,9 @@ const Login = () => {
                 username: data.username,
                 token: response.data.access,
               });
+
+            toast.success("Login Successful!");
+
             router.push("/");
           }
         },
