@@ -7,4 +7,6 @@ export interface ICartInfoProps {
 
 export interface IUserMenuProps {
   user?: IUser | null;
+  logoutHandler: () => void;
+  accountSettingHandler: () => void;
 }

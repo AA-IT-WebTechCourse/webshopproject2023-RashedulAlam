@@ -7,6 +7,7 @@ export interface IUserConext {
   user?: IUser | null;
   setUserLoggedIn?: (user: any) => void;
   isLoggedIn?: boolean;
+  logoutUser?: () => void;
 }
 
 export interface IProduct {

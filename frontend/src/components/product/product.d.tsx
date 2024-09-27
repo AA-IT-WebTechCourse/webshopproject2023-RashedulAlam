@@ -5,6 +5,7 @@ export interface IProductCardProps {
   product: IProduct;
   addToCart?: (product: IProduct) => void;
   removeFromCart?: (id: string) => void;
+  showActionButton: boolean;
 }
 
 export interface IProductsProps {
@@ -12,6 +13,7 @@ export interface IProductsProps {
   viewType: ViewType;
   addToCart?: (product: IProduct) => void;
   removeFromCart?: (id: string) => void;
+  showActionButton: boolean;
 }
 
 export enum ViewType {

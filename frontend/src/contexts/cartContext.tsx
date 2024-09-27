@@ -4,6 +4,7 @@ import React, {
   useState,
   useContext,
   PropsWithChildren,
+  useEffect,
 } from "react";
 import { ICartContext, IProduct } from "./contexts.d";
 import config from "@/config/config";
@@ -11,15 +12,8 @@ import config from "@/config/config";
 const CartContext = createContext<ICartContext>({ products: [] });
 
 export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const initialState: IProduct[] =
-    typeof window !== "undefined" &&
-    localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS)
-      ? JSON.parse(
-          localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS) ?? "[]"
-        )
-      : [];
-
-  const [products, setProducts] = useState<IProduct[]>(initialState);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const addProductHandler = (product: IProduct) => {
     setProducts((x: IProduct[]) => {
@@ -56,8 +50,29 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
     removeFromCart: removeProductHandler,
   };
 
+  useEffect(() => {
+    const initialState: IProduct[] =
+      typeof window !== "undefined" &&
+      localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS)
+        ? JSON.parse(
+            localStorage.getItem(config.LOCAL_STORAGE.CART.PRODUCTS) ?? "[]"
+          )
+        : [];
+
+    setProducts(initialState);
+    setLoading(false);
+  }, [setProducts]);
+
   return (
-    <CartContext.Provider value={contextvalue}>{children}</CartContext.Provider>
+    <>
+      {loading ? (
+        <></>
+      ) : (
+        <CartContext.Provider value={contextvalue}>
+          {children}
+        </CartContext.Provider>
+      )}
+    </>
   );
 };
 

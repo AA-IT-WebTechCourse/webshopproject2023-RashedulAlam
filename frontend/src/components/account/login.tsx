@@ -20,7 +20,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<TLogin> = (data: any) => {
     instance
-      .post<TLogin,AxiosResponse<ILoginResponse>>("api/v1/core/token/", data)
+      .post<TLogin, AxiosResponse<ILoginResponse>>("api/v1/core/token/", data)
       .then((response) => {
         if (response.status == 200) {
           setUserLoggedIn &&
@@ -28,6 +28,7 @@ const Login = () => {
               username: data.username,
               token: response.data.access,
             });
+          router.push("/");
         }
       });
   };
