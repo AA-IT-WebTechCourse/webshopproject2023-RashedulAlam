@@ -30,7 +30,7 @@ const ProductCard = ({
     }, 5000);
   };
 
-  const { created_at, description, id, owner, price, title } = product;
+  const { created_at, description, id, owner_name, price, title } = product;
   const isExist = isExistsOnCart && isExistsOnCart(product);
   const eventType = isExist ? EEventType.REMOVE : EEventType.ADD;
 
@@ -40,7 +40,7 @@ const ProductCard = ({
         <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
           <div className="px-4 py-3 w-72">
             <p className="text-white text-xs w-fit p-1 rounded-md bg-yellow-500">
-              Seller: {owner}
+              Seller: {owner_name}
             </p>
             <p className="text-lg font-bold text-blue-600 truncate block capitalize">
               {title}
@@ -128,7 +128,7 @@ const ProductCard = ({
           <div className="flex">
             <div className="px-4 py-3 w-fit flex flex-col justify-start gap-1">
               <p className="text-white text-xs w-fit p-1 rounded-md bg-yellow-500">
-                Seller: {owner}
+                Seller: {owner_name}
               </p>
               <p className="text-lg font-bold text-blue-800 truncate block capitalize">
                 {title}

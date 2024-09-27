@@ -1,15 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import withAuth from "../HOC/withAuth";
 import InventoryCard from "./inventoryCard";
 import Pagination from "../pagination/pagination";
-import { ETabNames, IInventoryProps } from "./inventory.d";
+import { ETabNames, IInventoryProps, IPaginationResponse } from "./inventory.d";
 import { useRouter } from "next/navigation";
+import { IProduct } from "@/contexts/contexts.d";
+import { axiosInstanceWithAuth } from "@/libs/utils/api";
+import config from "@/config/config";
+import { IPaginationProps } from "../pagination/pagination.d";
 
 const Inventory: React.FC<IInventoryProps> = () => {
   const [activeTab, setActiveTab] = useState<ETabNames>(ETabNames.SALE);
-  const products = Array(10).fill(10);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const router = useRouter();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   const tabClass = {
     active: " bg-gray-200 hover:bg-gray-200",
@@ -24,37 +30,63 @@ const Inventory: React.FC<IInventoryProps> = () => {
     return activeTab == tabName ? tabClass.active : tabClass.inactive;
   };
 
+  useEffect(() => {
+    axiosInstanceWithAuth
+      .get<IPaginationResponse<IProduct>>(
+        config.API_URLS.INVENTORY.SALE(currentPage)
+      )
+      .then(
+        ({ data }) => {
+          if (data) {
+            setProducts(data.results);
+            setTotalPages(Math.ceil(data.count / config.PAGINATION.PAGE_SIZE));
+          }
+        },
+        () => {}
+      );
+  }, [currentPage]);
+
+  const onPageChangeHandler = (nextPage: number) => {
+    setCurrentPage(nextPage);
+  };
+
+  const paginationProps: IPaginationProps = {
+    currentPage: currentPage,
+    totalPages: totalPages,
+    onPageChange: onPageChangeHandler,
+  };
+
   return (
     <div className="flex flex-col gap-6 min-h-[75vh] w-full">
       <ul className="flex flex-wrap border-b border-gray-200 ">
         <li className="mr-2">
           <button
-            className={`inline-block text-blue-600 hover:text-blue-700 rounded-t-lg py-4 px-4 text-sm font-medium text-center ${getTabClass(
+            className={`capitalize inline-block text-blue-600 hover:text-blue-700 rounded-t-lg py-4 px-4 text-sm font-medium text-center ${getTabClass(
               ETabNames.SALE
             )}`}
             onClick={() => setActiveTab(ETabNames.SALE)}
           >
-            Sale
+            {ETabNames.SALE}
           </button>
         </li>
         <li className="mr-2">
           <button
-            className={`inline-block text-blue-600 hover:text-blue-700 rounded-t-lg py-4 px-4 text-sm font-medium text-center ${getTabClass(
+            className={`capitalize inline-block text-blue-600 hover:text-blue-700 rounded-t-lg py-4 px-4 text-sm font-medium text-center ${getTabClass(
               ETabNames.SOLD
             )}`}
             onClick={() => setActiveTab(ETabNames.SOLD)}
           >
-            Sold
+            {ETabNames.SOLD}
           </button>
         </li>
         <li className="mr-2">
           <button
-            className={`inline-block text-blue-600 hover:text-blue-700 rounded-t-lg py-4 px-4 text-sm font-medium text-center ${getTabClass(
+            className={`capitalize inline-block text-blue-600 hover:text-blue-700 rounded-t-lg py-4 px-4 text-sm font-medium text-center ${getTabClass(
               ETabNames.PURCHASED
             )}`}
             onClick={() => setActiveTab(ETabNames.PURCHASED)}
           >
-            Purchased
+            {ETabNames.PURCHASED}
           </button>
         </li>
       </ul>
@@ -82,12 +114,11 @@ const Inventory: React.FC<IInventoryProps> = () => {
         )}
         <div className="flex flex-col gap-4">
           {products.map((x, i) => (
-            // <InventoryCard key={i} viewType={activeTab} />
-            <></>
+            <InventoryCard key={i} viewType={activeTab} product={x} />
           ))}
         </div>
         <div>
-          {/* <Pagination /> */}
+          <Pagination {...paginationProps} />
         </div>
       </div>
     </div>

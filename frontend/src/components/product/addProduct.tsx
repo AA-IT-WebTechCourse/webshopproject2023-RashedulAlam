@@ -1,19 +1,32 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TCreateProduct } from "./product.d";
-
+import { axiosInstanceWithAuth } from "@/libs/utils/api";
+import config from "@/config/config";
+import { toast } from "react-toastify";
 
 const AddProduct = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TCreateProduct>();
 
+  const [loading, setLoader] = useState<boolean>(false);
+
   const onSubmit: SubmitHandler<TCreateProduct> = (data) => {
-    console.log(errors);
-    console.log(data);
+    setLoader(true);
+    axiosInstanceWithAuth.post(config.API_URLS.PRODUCT.ADD_PRODUCT, data).then(
+      () => {
+        reset();
+        toast.success("Producted created !");
+      },
+      () => {
+        toast.error("Could not create product !");
+      }
+    );
   };
 
   return (
@@ -22,7 +35,12 @@ const AddProduct = () => {
         <h2 className="text-3xl font-bold mb-6 text-left text-blue-600">
           <span className=" bg-clip-text">Add Product</span>
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(onSubmit)(e);
+          }}
+        >
           <div className="mb-6 flex flex-col">
             <label
               htmlFor="title"
@@ -95,6 +113,7 @@ const AddProduct = () => {
           <div className="flex">
             <button
               type="submit"
+              disabled={loading}
               className="bg-blue-600 hover:bg-blue-800  text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-fit"
             >
               Save

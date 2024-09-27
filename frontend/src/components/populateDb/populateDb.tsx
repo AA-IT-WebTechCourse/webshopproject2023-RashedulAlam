@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import axiosInstance from "@/libs/utils/api";
 
 const PopulateDb = () => {
   const [loading, setLoading] = useState<boolean>(false);

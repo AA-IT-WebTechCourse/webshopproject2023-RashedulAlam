@@ -2,13 +2,19 @@
 import React from "react";
 import { ETabNames, IInventoryCardProps } from "./inventory.d";
 import { useRouter } from "next/navigation";
+import { formateDate } from "@/libs/utils/date";
 
-const InventoryCard: React.FC<IInventoryCardProps> = ({ viewType }) => {
+const InventoryCard: React.FC<IInventoryCardProps> = ({
+  viewType,
+  product,
+}) => {
   const router = useRouter();
 
   const navigationHandler = (id: string) => {
     router.push(`/myitems/${id}`);
   };
+
+  const { created_at, description, id, owner_name, price, title } = product;
 
   return (
     <div className="w-full bg-white shadow-md rounded-xl duration-500 hover:scale-[1.02] hover:shadow-xl flex flex-row justify-between">
@@ -16,13 +22,13 @@ const InventoryCard: React.FC<IInventoryCardProps> = ({ viewType }) => {
         <div className="px-4 py-3 w-fit flex flex-col justify-start gap-1">
           <div className="flex flex-row gap-2">
             <p className="text-white text-xs w-fit p-1 rounded-md bg-green-500">
-              Published Date: 2012-12-12 10 am
+              Published Date: {formateDate(created_at)}
             </p>
 
             {viewType == ETabNames.SOLD && (
               <>
                 <p className="text-white text-xs p-1 rounded-md bg-gray-500">
-                  Purchased by: ralam
+                  Purchased by: {owner_name}
                 </p>
 
                 <p className="text-white text-xs w-fit p-1 rounded-md bg-blue-500">
@@ -44,18 +50,18 @@ const InventoryCard: React.FC<IInventoryCardProps> = ({ viewType }) => {
             )}
           </div>
           <p className="text-lg font-bold text-blue-800 truncate block capitalize">
-            Product Title
+            {title}
           </p>
           <div className="flex items-center mt-10">
             <p className="text-lg font-semibold text-blue-400 cursor-auto">
-              $149
+              ${price}
             </p>
             {viewType == ETabNames.SALE && (
               <button
                 className="ml-auto"
                 aria-label="add to cart"
                 type="button"
-                onClick={() => navigationHandler("1")}
+                onClick={() => navigationHandler(id)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -77,14 +83,7 @@ const InventoryCard: React.FC<IInventoryCardProps> = ({ viewType }) => {
         </div>
       </div>
       <div className="flex max-w-96 px-4 py-3">
-        <div className="text-gray-400 text-xs">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged.
-        </div>
+        <div className="text-gray-400 text-xs">{description}</div>
       </div>
     </div>
   );

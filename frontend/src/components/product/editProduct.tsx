@@ -1,20 +1,62 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TUpdateProduct } from "./product.d";
-
+import { useParams, useRouter } from "next/navigation";
+import { axiosInstanceWithAuth } from "@/libs/utils/api";
+import config from "@/config/config";
+import { IProduct } from "@/contexts/contexts.d";
+import { toast } from "react-toastify";
 
 const EditProduct = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<TUpdateProduct>();
+  const params = useParams();
+  const router = useRouter();
+  const [loading, setLoader] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<TUpdateProduct> = (data) => {
-    console.log(errors);
-    console.log(data);
+    setLoader(true);
+    axiosInstanceWithAuth
+      .put(config.API_URLS.PRODUCT.UPDATE_PRODUCT(id as string), data)
+      .then(
+        () => {
+          toast.success("Producted updated !");
+          setLoader(false);
+        },
+        () => {
+          toast.error("Could not update product !");
+          setLoader(false);
+        }
+      );
   };
+
+  const { id } = params;
+
+  useEffect(() => {
+    if (id as string) {
+      axiosInstanceWithAuth
+        .get<IProduct>(config.API_URLS.PRODUCT.GET_PRODUCT(id as string))
+        .then(
+          ({ data }) => {
+            setValue("title", data.title);
+            setValue("price", data.price);
+            setValue("description", data.description);
+          },
+          (error) => {
+            if (error.status == 404) {
+              router.push("/myitems");
+            } else {
+              console.log(error);
+            }
+          }
+        );
+    }
+  });
 
   return (
     <div className="flex justify-center items-center min-w-full ">
@@ -95,6 +137,7 @@ const EditProduct = () => {
           <div className="flex">
             <button
               type="submit"
+              disabled={loading}
               className="bg-blue-600 hover:bg-blue-800  text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-fit"
             >
               Save

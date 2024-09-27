@@ -14,7 +14,7 @@ export interface IProduct {
   title: string;
   description: string;
   price: number;
-  owner: string;
+  owner_name: string;
   created_at: string;
   id: string;
 }
