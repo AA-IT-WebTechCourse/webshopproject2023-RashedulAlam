@@ -33,7 +33,7 @@ const Inventory: React.FC<IInventoryProps> = () => {
   useEffect(() => {
     axiosInstanceWithAuth
       .get<IPaginationResponse<IProduct>>(
-        config.API_URLS.INVENTORY.SALE(currentPage)
+        config.API_URLS.INVENTORY.PRODUCTS(currentPage, activeTab)
       )
       .then(
         ({ data }) => {
@@ -44,7 +44,7 @@ const Inventory: React.FC<IInventoryProps> = () => {
         },
         () => {}
       );
-  }, [currentPage]);
+  }, [currentPage, activeTab]);
 
   const onPageChangeHandler = (nextPage: number) => {
     setCurrentPage(nextPage);

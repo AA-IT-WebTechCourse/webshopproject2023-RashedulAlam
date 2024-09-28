@@ -64,7 +64,13 @@ const EditProduct = () => {
         <h2 className="text-3xl font-bold mb-6 text-left text-blue-600">
           <span className=" bg-clip-text">Update Product</span>
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(onSubmit)(e);
+          }}
+          noValidate
+        >
           <div className="mb-6 flex flex-col">
             <label
               htmlFor="title"

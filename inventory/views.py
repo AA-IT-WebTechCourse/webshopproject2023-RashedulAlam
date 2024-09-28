@@ -4,11 +4,12 @@ from .models import Product
 from .serializers import ProductListSerializer, ProductSerializer
 from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes
 
+
 class ProductListView(BaseListView):
     queryset = Product.objects.all()
     serializer_class = ProductListSerializer
     VALID_TYPES = ['sale', 'purchased', 'sold']
-    
+
     @extend_schema(
         parameters=[
             OpenApiParameter(
@@ -19,7 +20,6 @@ class ProductListView(BaseListView):
             ),
         ]
     )
-    
     def get(self, request, *args, **kwargs):
         """
         Retrieve a list of products, optionally filtered by the 'type' query parameter.
@@ -42,18 +42,17 @@ class ProductListView(BaseListView):
         inventory_type = self.request.query_params.get('type', None)
 
         if inventory_type not in self.VALID_TYPES:
-            raise ValidationError(f"Invalid type. Allowed values are: {', '.join(self.VALID_TYPES)}")
+            raise ValidationError(f"Invalid type. Allowed values are: {
+                                  ', '.join(self.VALID_TYPES)}")
 
         if inventory_type == 'sale':
-            queryset = queryset.filter(owner=user, purchaser__isnull=True)
+            return queryset.filter(owner=user, purchaser__isnull=True)
 
         elif inventory_type == 'sold':
-            queryset = queryset.filter(purchaser__isnull=False,owner=user)
+            return queryset.filter(purchaser__isnull=False, owner=user)
 
         elif inventory_type == 'purchased':
-            queryset = queryset.filter(purchaser=user)
-
-        return queryset
+            return queryset.filter(purchaser=user)
 
 
 class ProductDetailsView(BaseDetailView):

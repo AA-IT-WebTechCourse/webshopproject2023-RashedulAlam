@@ -21,9 +21,7 @@ const config = {
       UPDATE_PRODUCT: (id: string) => `api/v1/inventory/products/${id}/`,
     },
     INVENTORY: {
-      SALE: (pageSize: number) => `api/v1/inventory/products/?page=${pageSize}`,
-      SOLD: "",
-      PURCHASED: "",
+      PRODUCTS: (pageSize: number, type: any) => `api/v1/inventory/products/?page=${pageSize}&type=${type}`,
     },
     USER_MANAGEMENT: {
       CURRENT_USER: "api/v1/user-management/current-user/",
