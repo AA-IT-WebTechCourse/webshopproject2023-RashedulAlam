@@ -13,7 +13,7 @@ import { useCart } from "@/contexts/cartContext";
 import { IPaginationProps } from "../pagination/pagination.d";
 import { ISearchProps } from "../search/search.d";
 import { useAuth } from "@/contexts/authenticationContext";
-import { axiosInstanceWithAuth } from "@/libs/utils/api";
+import axiosInstance from "@/libs/utils/api";
 import { IPaginationResponse } from "../inventory/inventory.d";
 import config from "@/config/config";
 import { IProduct } from "@/contexts/contexts.d";
@@ -51,7 +51,7 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    axiosInstanceWithAuth
+    axiosInstance
       .get<IPaginationResponse<IProduct>>(
         config.API_URLS.PRODUCT.PRODUCTS(currentPage, searchText)
       )
