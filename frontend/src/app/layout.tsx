@@ -29,7 +29,7 @@ export default function RootLayout({
         <AuthenticationProvider>
           <CartProvider>
             <Navbar />
-            {children}
+            <div className="max-w-screen-xl mx-auto">{children}</div>
             <Footer />
           </CartProvider>
           <ToastContainer
