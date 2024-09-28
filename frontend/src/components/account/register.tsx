@@ -7,6 +7,7 @@ import instance from "@/libs/utils/api";
 import { AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 import config from "@/config/config";
+import withoutAuth from "../HOC/withoutAuth";
 
 const Register = () => {
   const {
@@ -191,4 +192,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default withoutAuth(Register);
