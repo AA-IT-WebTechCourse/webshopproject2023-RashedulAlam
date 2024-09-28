@@ -12,17 +12,22 @@ import Pagination from "../pagination/pagination";
 import { useCart } from "@/contexts/cartContext";
 import { IPaginationProps } from "../pagination/pagination.d";
 import { ISearchProps } from "../search/search.d";
-import { mockProducts } from "./dummyProducts";
 import { useAuth } from "@/contexts/authenticationContext";
+import axiosInstance from "@/libs/utils/api";
+import { IPaginationResponse } from "../inventory/inventory.d";
+import config from "@/config/config";
+import { IProduct } from "@/contexts/contexts.d";
 
 const LandingPage = () => {
   const [viewType, setViewType] = useState<ViewType>(ViewType.GRID_VIEW);
   const [searchText, setSearchText] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const { addToCart, removeFromCart, isExistsOnCart } = useCart();
   const { isLoggedIn } = useAuth();
   const productProps: IProductsProps = {
-    products: mockProducts,
+    products: products,
     viewType: viewType,
     addToCart: addToCart,
     removeFromCart: removeFromCart,
@@ -30,8 +35,8 @@ const LandingPage = () => {
     isExistsOnCart: isExistsOnCart,
   };
   const paginationProps: IPaginationProps = {
-    currentPage: 1,
-    totalPages: 1,
+    currentPage: currentPage,
+    totalPages: totalPages,
     onPageChange: setCurrentPage,
   };
 
@@ -46,14 +51,27 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    console.log(searchText);
-    console.log(currentPage);
+    axiosInstance
+      .get<IPaginationResponse<IProduct>>(
+        config.API_URLS.PRODUCT.PRODUCTS(currentPage, searchText)
+      )
+      .then(
+        ({ data }) => {
+          if (data) {
+            setProducts(data.results);
+            setTotalPages(Math.ceil(data.count / config.PAGINATION.PAGE_SIZE));
+          }
+        },
+        () => {}
+      );
   }, [searchText, currentPage]);
 
   return (
-    <div className="flex flex-row gap-4 flex-wrap justify-between">
-      <Search {...searchProps} />
-      <ViewToggle {...viewToggleProps} />
+    <div className="flex flex-col gap-4 min-w-full">
+      <div className="flex flex-row justify-between w-full items-center">
+        <Search {...searchProps} />
+        <ViewToggle {...viewToggleProps} />
+      </div>
       <Products {...productProps} />
       <Pagination {...paginationProps} />
     </div>

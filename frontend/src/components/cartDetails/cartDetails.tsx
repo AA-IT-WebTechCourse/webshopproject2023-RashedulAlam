@@ -12,7 +12,7 @@ const CartDetails = () => {
   };
 
   const totalPrice = products.reduce(
-    (current, prev) => current + prev.price,
+    (current, prev) => current + parseInt(prev.price.toString()),
     0
   );
 
@@ -50,7 +50,7 @@ const CartDetails = () => {
                   Remove
                 </button>
               </div>
-              <div className="text-sm font-semibold ">{x.price.toFixed(2)}</div>
+              <div className="text-sm font-semibold ">{x.price}</div>
             </div>
           ))}
         </div>

@@ -1,11 +1,11 @@
 from core.views import BaseDetailView, BaseListView
 from .models import Product
-from .serializers import ProductSerializer
+from .serializers import ProductListSerializer, ProductSerializer
 
 
 class ProductListView(BaseListView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductListSerializer
 
 
 class ProductDetailsView(BaseDetailView):

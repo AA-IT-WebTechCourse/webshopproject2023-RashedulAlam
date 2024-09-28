@@ -1,3 +1,5 @@
+import { IProduct } from "@/contexts/contexts.d";
+
 export enum ETabNames {
   SALE = "sale",
   SOLD = "sold",
@@ -5,15 +7,13 @@ export enum ETabNames {
 }
 
 export interface IInventoryCardProps {
-  title: string;
-  description: string;
-  price: number;
-  created_by: string;
-  purchased_by?: string;
-  purchased_at?: string;
-  created_at: string;
   viewType: ETabNames;
-  id: string;
+  product: IProduct;
 }
 
 export interface IInventoryProps {}
+
+export interface IPaginationResponse<T> {
+  count: number;
+  results: T[];
+}

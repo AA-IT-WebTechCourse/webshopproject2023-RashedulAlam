@@ -8,22 +8,26 @@ const config = {
     },
   },
   API_URLS: {
+    POPULATE_DB: "api/v1/initialization/",
     AUTH: {
       LOGIN: "api/v1/core/token/",
       REGISTER: "api/v1/user-management/register/",
     },
     PRODUCT: {
-      PRODUCTS: "",
-      PRODUCT: "",
-      ADD_PRODUCT: "",
-      REMOVE_PRODUCT: "",
-      UPDATE_PRODUCT: "",
+      PRODUCTS: (pageNumber: number, searchTerm: string) =>
+        `api/v1/public/products?page=${pageNumber}&search=${searchTerm}`,
+      GET_PRODUCT: (id: string) => `api/v1/inventory/products/${id}/`,
+      ADD_PRODUCT: "api/v1/inventory/products/",
+      UPDATE_PRODUCT: (id: string) => `api/v1/inventory/products/${id}/`,
     },
     INVENTORY: {
-      SALE: "",
+      SALE: (pageSize: number) => `api/v1/inventory/products/?page=${pageSize}`,
       SOLD: "",
       PURCHASED: "",
     },
+  },
+  PAGINATION: {
+    PAGE_SIZE: 10,
   },
 };
 

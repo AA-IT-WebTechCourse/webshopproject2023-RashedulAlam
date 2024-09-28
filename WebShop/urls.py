@@ -16,31 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
-
-schema_view = get_schema_view(
-    openapi.Info(
-        title="WebShop",
-        default_version='v1',
-        description="WebShop API Documentation",
-    ),
-    public=True,
-    permission_classes=(permissions.AllowAny,),
-)
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from .views import ProductListView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/public/products', ProductListView.as_view(), name='product-list'),
     path('api/v1/inventory/', include('inventory.urls')),
     path('api/v1/user-management/', include('user_management.urls')),
     path('api/v1/core/', include('core.urls')),
     path('api/v1/initialization/', include('initialization.urls')),
-    path('swagger<format>/', schema_view.without_ui(cache_timeout=0),
-         name='schema-json'),
-    path('', schema_view.with_ui('swagger',
-         cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc',
-         cache_timeout=0), name='schema-redoc'),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'),
+         name='swagger-ui'),
+    path('api/schema/redoc/',
+         SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]

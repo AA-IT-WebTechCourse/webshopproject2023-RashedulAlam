@@ -18,7 +18,7 @@ const products: React.FC<IProductsProps> = ({
     isExistsOnCart: isExistsOnCart,
   };
   return (
-    <div className="flex flex-row gap-4 flex-wrap justify-between">
+    <div className="flex flex-row gap-4 flex-wrap justify-start">
       {products.map((x, i) => (
         <ProductCard key={i} product={x} {...productCardProps} />
       ))}
