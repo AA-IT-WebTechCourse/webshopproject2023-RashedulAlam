@@ -11,13 +11,14 @@ class Product(BaseModel):
     description = models.TextField()
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='owned_products',)
-    purchased_products = models.ForeignKey(
+    purchaser = models.ForeignKey(
         User,
-        related_name='purchased_products',
+        related_name='purchaser',
         on_delete=models.SET_NULL,
         null=True,
         blank=True
     )
+    purchased_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         """Meta definition for Product."""

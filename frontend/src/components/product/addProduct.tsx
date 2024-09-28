@@ -40,6 +40,7 @@ const AddProduct = () => {
             e.preventDefault();
             handleSubmit(onSubmit)(e);
           }}
+          noValidate
         >
           <div className="mb-6 flex flex-col">
             <label
