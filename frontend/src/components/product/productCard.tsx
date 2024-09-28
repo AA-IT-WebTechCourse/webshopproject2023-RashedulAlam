@@ -45,13 +45,13 @@ const ProductCard = ({
             <p className="text-lg font-bold text-blue-600 truncate block capitalize">
               {title}
             </p>
-            <div className="text-gray-400 text-xs py-2">{description}</div>
+            <div className="text-gray-400 text-xs py-2 min-h-40">{description}</div>
             <p className="text-white text-xs w-fit p-1 rounded-md bg-green-500">
               Published: {created_at}
             </p>
             <div className="flex items-center">
               <p className="text-lg font-semibold text-blue-400 cursor-auto my-3">
-                ${price.toFixed(2)}
+                ${price}
               </p>
               {showActionButton && (
                 <button
@@ -140,7 +140,7 @@ const ProductCard = ({
               </div>
               <div className="flex items-center mt-10">
                 <p className="text-lg font-semibold text-blue-400 cursor-auto">
-                  ${price.toFixed(2)}
+                  ${price}
                 </p>
                 {showActionButton && (
                   <button

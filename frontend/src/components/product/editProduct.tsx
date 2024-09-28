@@ -56,7 +56,7 @@ const EditProduct = () => {
           }
         );
     }
-  });
+  }, [setValue, id, router]);
 
   return (
     <div className="flex justify-center items-center min-w-full ">

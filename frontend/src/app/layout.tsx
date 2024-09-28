@@ -6,8 +6,9 @@ import Footer from "@/components/footer/footer";
 import { AuthenticationProvider } from "@/contexts/authenticationContext";
 import { CartProvider } from "@/contexts/cartContext";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
+import "react-loading-skeleton/dist/skeleton.css";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <NextTopLoader />
         <AuthenticationProvider>
           <CartProvider>
             <Navbar />

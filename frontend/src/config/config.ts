@@ -14,7 +14,8 @@ const config = {
       REGISTER: "api/v1/user-management/register/",
     },
     PRODUCT: {
-      PRODUCTS: "",
+      PRODUCTS: (pageNumber: number, searchTerm: string) =>
+        `api/v1/public/products?page=${pageNumber}&search=${searchTerm}`,
       GET_PRODUCT: (id: string) => `api/v1/inventory/products/${id}/`,
       ADD_PRODUCT: "api/v1/inventory/products/",
       UPDATE_PRODUCT: (id: string) => `api/v1/inventory/products/${id}/`,

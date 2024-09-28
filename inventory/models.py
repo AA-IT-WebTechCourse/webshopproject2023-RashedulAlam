@@ -9,7 +9,15 @@ class Product(BaseModel):
     title = models.CharField(max_length=512)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='owned_products',)
+    purchased_products = models.ForeignKey(
+        User,
+        related_name='purchased_products',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     class Meta:
         """Meta definition for Product."""
