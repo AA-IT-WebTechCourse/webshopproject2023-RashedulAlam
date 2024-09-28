@@ -13,7 +13,11 @@ function withAuth<P extends object>(WrappedComponent: ComponentType<P>) {
       if (!isLoggedIn) {
         router.push("/login");
       }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, router]);
+
+    if (!isLoggedIn) {
+      return null;
+    }
 
     return <WrappedComponent {...props} />;
   };

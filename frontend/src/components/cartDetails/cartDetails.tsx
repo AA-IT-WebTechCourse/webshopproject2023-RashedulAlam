@@ -2,6 +2,7 @@
 import { useCart } from "@/contexts/cartContext";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import withAuth from "../HOC/withAuth";
 
 const CartDetails = () => {
   const router = useRouter();
@@ -122,4 +123,4 @@ const CartDetails = () => {
   );
 };
 
-export default CartDetails;
+export default withAuth(CartDetails);

@@ -6,6 +6,7 @@ import { axiosInstanceWithAuth } from "@/libs/utils/api";
 import config from "@/config/config";
 import { HttpStatusCode } from "axios";
 import { toast } from "react-toastify";
+import withAuth from "../HOC/withAuth";
 
 const UpdateAccount = () => {
   const {
@@ -210,4 +211,4 @@ const UpdateAccount = () => {
   );
 };
 
-export default UpdateAccount;
+export default withAuth(UpdateAccount);
