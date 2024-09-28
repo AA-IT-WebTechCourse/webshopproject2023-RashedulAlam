@@ -112,14 +112,32 @@ const Inventory: React.FC<IInventoryProps> = () => {
             <p className="text-blue-500 font-semibold text-sm">Add Product</p>
           </div>
         )}
-        <div className="flex flex-col gap-4">
-          {products.map((x, i) => (
-            <InventoryCard key={i} viewType={activeTab} product={x} />
-          ))}
-        </div>
-        <div>
-          <Pagination {...paginationProps} />
-        </div>
+        {products.length ? (
+          <div className="flex flex-col gap-4">
+            {products.map((x, i) => (
+              <InventoryCard key={i} viewType={activeTab} product={x} />
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
+
+        {products.length ? (
+          <div>
+            <Pagination {...paginationProps} />
+          </div>
+        ) : (
+          <></>
+        )}
+        {!products.length ? (
+          <div>
+            <p role="alert" className="text-red-600 font-semibold mt-2">
+              No Product Found for {activeTab} !
+            </p>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

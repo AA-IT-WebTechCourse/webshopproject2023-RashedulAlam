@@ -9,14 +9,23 @@ import React, {
 import { ICartContext, IProduct } from "./contexts.d";
 import config from "@/config/config";
 import { toast } from "react-toastify";
+import { useAuth } from "./authenticationContext";
 
 const CartContext = createContext<ICartContext>({ products: [] });
 
 export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { user, isLoggedIn } = useAuth();
 
   const addProductHandler = (product: IProduct) => {
+    if (user?.username == product.owner_name) {
+      toast.error(
+        `${product.title} can not be added as it's your own product!`
+      );
+
+      return;
+    }
     setProducts((x: IProduct[]) => {
       const updatedProducts = [...x, product];
       updateLocalStorage(updatedProducts);

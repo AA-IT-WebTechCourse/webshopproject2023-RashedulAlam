@@ -77,13 +77,13 @@ const UserMenu: React.FC<IUserMenuProps> = ({
       <ul className="hidden group-focus-within:block list-none absolute bg-gray-50 w-40 z-1 shadow-lg animate-slideIn">
         {userMenus.map((x, i) => (
           <li
-            className="py-3 px-4 cursor-pointer text-xs font-semibold text-blue-700  hover:bg-blue-200"
+            className="cursor-pointer text-xs font-semibold text-blue-700  hover:bg-blue-200 mb-1"
             key={i}
           >
             <button
               aria-label={x.name}
               onClick={() => navigationHandler(x.url, x.isLogOutMenu)}
-              className="flex flex-row gap-2 items-center w-full"
+              className="flex flex-row gap-2 items-center w-full py-3 px-4"
             >
               <span>{x.icon}</span>
               <span>{x.name}</span>
