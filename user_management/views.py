@@ -1,5 +1,5 @@
 from rest_framework import generics, status
-from .serializers import UserSerializer
+from .serializers import UserDetailsSerializer, UserSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ChangePasswordSerializer
@@ -29,6 +29,10 @@ class CurrentUserDetailsView(generics.RetrieveAPIView):
     Retrieve the details of the currently authenticated user.
     """
     permission_classes = [IsAuthenticated]
+    serializer_class = UserDetailsSerializer
 
     def get(self, request, *args, **kwargs):
-        return self.request.user
+        user =  self.request.user
+        serializer = self.get_serializer(user)
+        
+        return Response(serializer.data)

@@ -25,6 +25,10 @@ const config = {
       SOLD: "",
       PURCHASED: "",
     },
+    USER_MANAGEMENT: {
+      CURRENT_USER: "api/v1/user-management/current-user/",
+      UPDATE_USER_PASSWORD: 'api/v1/user-management/change-password/'
+    },
   },
   PAGINATION: {
     PAGE_SIZE: 10,

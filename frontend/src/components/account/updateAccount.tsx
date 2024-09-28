@@ -1,25 +1,69 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { TUpdateUserAccount } from "./account.d";
+import { ICurrentUserDetails, TUpdateUserAccount } from "./account.d";
+import { axiosInstanceWithAuth } from "@/libs/utils/api";
+import config from "@/config/config";
+import { HttpStatusCode } from "axios";
+import { toast } from "react-toastify";
 
 const UpdateAccount = () => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
+    setError,
     formState: { errors },
   } = useForm<TUpdateUserAccount>();
 
   const onSubmit: SubmitHandler<TUpdateUserAccount> = (data) => {
-    console.log(errors);
-    console.log(data);
+    const request = {
+      old_password: data.password,
+      new_password: data.newPassword,
+    };
+
+    axiosInstanceWithAuth
+      .post<TUpdateUserAccount>(
+        config.API_URLS.USER_MANAGEMENT.UPDATE_USER_PASSWORD,
+        request
+      )
+      .then(
+        () => {
+          toast.success("Password successfully updated !");
+          reset();
+        },
+        (error) => {
+          if (error?.response?.status == HttpStatusCode.BadRequest) {
+            if (error.response?.data?.old_password) {
+              setError("root.serverError", {
+                type: "400",
+                message: error.response?.data?.old_password[0],
+              });
+            }
+          }
+
+          toast.error("Password could not be updated !");
+        }
+      );
   };
 
-  const [currentInfo] = useState({
-    username: "ralam",
-    email: "ralam@gmail.com",
-  });
+  const [user, setUser] = useState<ICurrentUserDetails | undefined>();
+
+  useEffect(() => {
+    axiosInstanceWithAuth
+      .get<ICurrentUserDetails>(config.API_URLS.USER_MANAGEMENT.CURRENT_USER)
+      .then(
+        (response) => {
+          if (response.status == HttpStatusCode.Ok) {
+            setUser(response.data);
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }, []);
 
   return (
     <div className="flex justify-center items-center w-full">
@@ -27,7 +71,13 @@ const UpdateAccount = () => {
         <h2 className="text-3xl font-bold mb-6 text-center ">
           <span className="text-blue-500 bg-clip-text">Account Setting</span>
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(onSubmit)(e);
+          }}
+          noValidate
+        >
           <div className="mb-6">
             <label
               htmlFor="username"
@@ -37,7 +87,7 @@ const UpdateAccount = () => {
             </label>
             <div>
               <input
-                defaultValue={currentInfo.username}
+                defaultValue={user?.username || ""}
                 id="username"
                 type="text"
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
@@ -55,7 +105,7 @@ const UpdateAccount = () => {
             </label>
             <div>
               <input
-                defaultValue={currentInfo.email}
+                defaultValue={user?.email || ""}
                 id="email"
                 type="email"
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
@@ -139,6 +189,13 @@ const UpdateAccount = () => {
               </p>
             )}
           </div>
+          {errors?.root?.serverError && (
+            <div className="flex">
+              <p role="alert" className="text-red-600 font-semibold mt-2">
+                {errors?.root?.serverError?.message}
+              </p>
+            </div>
+          )}
           <div className="flex items-center justify-center mt-8">
             <button
               type="submit"

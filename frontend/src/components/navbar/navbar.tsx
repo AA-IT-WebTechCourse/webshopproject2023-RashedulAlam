@@ -125,15 +125,19 @@ const Navbar = () => {
                 </Link>
               </div>
             )}
-            {isLoggedIn && <CartInfo {...cartInfoProps} />}
-            {isLoggedIn && <UserMenu {...userMenuProps} />}
+            {isLoggedIn && (
+              <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 gap-4">
+                <CartInfo {...cartInfoProps} />
+                <UserMenu {...userMenuProps} />
+              </div>
+            )}
           </div>
         </div>
 
         <div
           className={
             open
-              ? "opacity-100 scale-100 ease-out duration-200 absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+              ? "opacity-100 scale-100 ease-out duration-200 absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-10"
               : "opacity-0 scale-95 absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
           }
         >
@@ -141,11 +145,10 @@ const Navbar = () => {
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                    alt="Workflow"
-                  />
+                  <span className="sr-only">Webshop</span>
+                  <span className="text-3xl text-blue-700 font-semibold drop-shadow-lg">
+                    WebShop
+                  </span>
                 </div>
                 <div className="-mr-2">
                   <button
@@ -179,7 +182,8 @@ const Navbar = () => {
                   return (
                     <Link
                       key={i}
-                      href="#"
+                      href={x.url}
+                      target={x.openNewTab ? "_blank" : "_self"}
                       className="text-base font-medium text-gray-900 hover:text-gray-700"
                     >
                       {x.name}

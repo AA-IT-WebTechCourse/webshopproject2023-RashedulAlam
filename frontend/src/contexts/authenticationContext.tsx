@@ -30,8 +30,7 @@ export const AuthenticationProvider: React.FC<PropsWithChildren> = ({
   };
 
   const logoutUser = () => {
-    localStorage.removeItem(config.LOCAL_STORAGE.TOKEN);
-    localStorage.removeItem(config.LOCAL_STORAGE.USER_NAME);
+    localStorage.clear();
     setUser(null);
   };
 
