@@ -15,17 +15,20 @@ const config = {
     },
     PRODUCT: {
       PRODUCTS: (pageNumber: number, searchTerm: string) =>
-        `api/v1/public/products?page=${pageNumber}&search=${searchTerm}`,
+        `api/v1/public/products?page=${pageNumber}${
+          !!searchTerm ? `&search=${searchTerm}` : ""
+        }`,
       GET_PRODUCT: (id: string) => `api/v1/inventory/products/${id}/`,
       ADD_PRODUCT: "api/v1/inventory/products/",
       UPDATE_PRODUCT: (id: string) => `api/v1/inventory/products/${id}/`,
     },
     INVENTORY: {
-      PRODUCTS: (pageSize: number, type: any) => `api/v1/inventory/products/?page=${pageSize}&type=${type}`,
+      PRODUCTS: (pageSize: number, type: any) =>
+        `api/v1/inventory/products/?page=${pageSize}&type=${type}`,
     },
     USER_MANAGEMENT: {
       CURRENT_USER: "api/v1/user-management/current-user/",
-      UPDATE_USER_PASSWORD: 'api/v1/user-management/change-password/'
+      UPDATE_USER_PASSWORD: "api/v1/user-management/change-password/",
     },
   },
   PAGINATION: {

@@ -42,8 +42,7 @@ class ProductListView(BaseListView):
         inventory_type = self.request.query_params.get('type', None)
 
         if inventory_type not in self.VALID_TYPES:
-            raise ValidationError(f"Invalid type. Allowed values are: {
-                                  ', '.join(self.VALID_TYPES)}")
+            raise ValidationError(f"Invalid type. Allowed values are: {', '.join(self.VALID_TYPES)}")
 
         if inventory_type == 'sale':
             return queryset.filter(owner=user, purchaser__isnull=True)

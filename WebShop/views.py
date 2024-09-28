@@ -26,6 +26,7 @@ class ProductListView(generics.ListAPIView):
     )
     def get_queryset(self):
         queryset = super().get_queryset()
+        queryset.filter(purchaser__isnull=False)
         search_term = self.request.query_params.get('search', None)
 
         if search_term is not None and search_term.strip():
