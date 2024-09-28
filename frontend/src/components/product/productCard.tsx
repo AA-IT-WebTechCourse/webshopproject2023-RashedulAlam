@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IProductCardProps, ViewType } from "./product.d";
 import { IProduct } from "@/contexts/contexts.d";
+import { formateDate } from "@/libs/utils/date";
 
 enum EEventType {
   ADD = "ADD",
@@ -47,7 +48,7 @@ const ProductCard = ({
             </p>
             <div className="text-gray-400 text-xs py-2 min-h-40">{description}</div>
             <p className="text-white text-xs w-fit p-1 rounded-md bg-green-500">
-              Published: {created_at}
+              Published: {formateDate(created_at)}
             </p>
             <div className="flex items-center">
               <p className="text-lg font-semibold text-blue-400 cursor-auto my-3">
@@ -135,7 +136,7 @@ const ProductCard = ({
               </p>
               <div className="flex flex-row gap-2">
                 <p className="text-white text-xs w-fit p-1 rounded-md bg-green-500">
-                  Published Date: {created_at}
+                  Published Date: {formateDate(created_at)}
                 </p>
               </div>
               <div className="flex items-center mt-10">

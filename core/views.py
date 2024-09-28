@@ -7,11 +7,9 @@ class BaseListView(generics.ListCreateAPIView):
     queryset = None
     serializer_class = None
     permission_classes = [IsAuthenticated]
-    # authentication_classes = [JWTAuthentication]
 
 
 class BaseDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = None
     serializer_class = None
     permission_classes = [IsAuthenticated]
-    # authentication_classes = [JWTAuthentication]

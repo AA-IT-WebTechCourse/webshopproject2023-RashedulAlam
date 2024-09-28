@@ -19,3 +19,9 @@ export type TUpdateUserAccount = {
 export interface ILoginResponse {
   access: string;
 }
+
+
+export interface ICurrentUserDetails {
+  username: string;
+  email: string;
+}
