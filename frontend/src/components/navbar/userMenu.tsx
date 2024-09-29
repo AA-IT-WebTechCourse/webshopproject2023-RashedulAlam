@@ -54,7 +54,7 @@ const UserMenu: React.FC<IUserMenuProps> = ({
   accountSettingHandler,
   logoutHandler,
 }) => {
-  const navigationHandler = (url?: string, isLogOutMenu?: boolean) => {
+  const navigationHandler = (isLogOutMenu?: boolean) => {
     isLogOutMenu ? logoutHandler() : accountSettingHandler();
   };
 
@@ -82,7 +82,7 @@ const UserMenu: React.FC<IUserMenuProps> = ({
           >
             <button
               aria-label={x.name}
-              onClick={() => navigationHandler(x.url, x.isLogOutMenu)}
+              onClick={() => navigationHandler(x.isLogOutMenu)}
               className="flex flex-row gap-2 items-center w-full py-3 px-4"
             >
               <span>{x.icon}</span>

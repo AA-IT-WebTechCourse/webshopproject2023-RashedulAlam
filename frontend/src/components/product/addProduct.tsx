@@ -105,11 +105,16 @@ const AddProduct = () => {
             <div>
               <textarea
                 id="description"
-                {...register("description")}
+                {...register("description", { required: true })}
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Enter short description"
               />
             </div>
+            {errors?.description?.type === "required" && (
+              <p role="alert" className="text-red-600 font-semibold mt-2">
+                Description is required
+              </p>
+            )}
           </div>
           <div className="flex">
             <button
