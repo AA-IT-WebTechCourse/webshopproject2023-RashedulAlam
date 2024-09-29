@@ -9,6 +9,8 @@ import { IProduct } from "@/contexts/contexts.d";
 import { axiosInstanceWithAuth } from "@/libs/utils/api";
 import config from "@/config/config";
 import { IPaginationProps } from "../pagination/pagination.d";
+import Search from "../search/search";
+import { ISearchProps } from "../search/search.d";
 
 const Inventory: React.FC<IInventoryProps> = () => {
   const [activeTab, setActiveTab] = useState<ETabNames>(ETabNames.SALE);
@@ -16,6 +18,7 @@ const Inventory: React.FC<IInventoryProps> = () => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [searchText, setSearchText] = useState<string>("");
 
   const tabClass = {
     active: " bg-gray-200 hover:bg-gray-200",
@@ -33,7 +36,7 @@ const Inventory: React.FC<IInventoryProps> = () => {
   useEffect(() => {
     axiosInstanceWithAuth
       .get<IPaginationResponse<IProduct>>(
-        config.API_URLS.INVENTORY.PRODUCTS(currentPage, activeTab)
+        config.API_URLS.INVENTORY.PRODUCTS(currentPage, activeTab, searchText)
       )
       .then(
         ({ data }) => {
@@ -44,7 +47,7 @@ const Inventory: React.FC<IInventoryProps> = () => {
         },
         () => {}
       );
-  }, [currentPage, activeTab]);
+  }, [currentPage, activeTab, searchText]);
 
   const onPageChangeHandler = (nextPage: number) => {
     setCurrentPage(nextPage);
@@ -54,6 +57,11 @@ const Inventory: React.FC<IInventoryProps> = () => {
     currentPage: currentPage,
     totalPages: totalPages,
     onPageChange: onPageChangeHandler,
+  };
+
+  const searchProps: ISearchProps = {
+    onSearch: setSearchText,
+    searchText: searchText,
   };
 
   return (
@@ -91,27 +99,30 @@ const Inventory: React.FC<IInventoryProps> = () => {
         </li>
       </ul>
       <div className="px-1 py-2 flex flex-col gap-4">
-        {activeTab == ETabNames.SALE && (
-          <div className="flex flex-row items-center gap-2">
-            <button
-              aria-label="add product"
-              className="rounded-full w-10 h-10 bg-blue-600 flex flex-row text-white"
-              onClick={() => navigateToNewProduct()}
-            >
-              <svg
-                width="32"
-                height="32"
-                stroke="white"
-                strokeWidth="3"
-                className="m-2"
+        <div className="flex flex-row items-center gap-2">
+          <Search {...searchProps} />
+          {activeTab == ETabNames.SALE && (
+            <>
+              <button
+                aria-label="add product"
+                className="rounded-full w-10 h-10 bg-blue-600 flex flex-row text-white"
+                onClick={() => navigateToNewProduct()}
               >
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-            </button>
-            <p className="text-blue-500 font-semibold text-sm">Add Product</p>
-          </div>
-        )}
+                <svg
+                  width="32"
+                  height="32"
+                  stroke="white"
+                  strokeWidth="3"
+                  className="m-2"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+              <p className="text-blue-500 font-semibold text-sm">Add Product</p>
+            </>
+          )}
+        </div>
         {products.length ? (
           <div className="flex flex-col gap-4">
             {products.map((x, i) => (

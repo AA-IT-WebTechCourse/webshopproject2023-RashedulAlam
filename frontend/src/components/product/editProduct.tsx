@@ -18,6 +18,7 @@ const EditProduct = () => {
   const params = useParams();
   const router = useRouter();
   const [loading, setLoader] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<TUpdateProduct> = (data) => {
     setLoader(true);
@@ -46,6 +47,9 @@ const EditProduct = () => {
             setValue("title", data.title);
             setValue("price", data.price);
             setValue("description", data.description);
+            if (data.is_readonly) {
+              setDisabled(true);
+            }
           },
           (error) => {
             if (error.status == 404) {
@@ -85,6 +89,7 @@ const EditProduct = () => {
                 type="text"
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Enter title"
+                disabled
               />
             </div>
             {errors.title?.type === "required" && (
@@ -110,6 +115,7 @@ const EditProduct = () => {
                 })}
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Enter price"
+                disabled={disabled}
               />
             </div>
             {errors.price?.type === "required" && (
@@ -137,13 +143,14 @@ const EditProduct = () => {
                 {...register("description")}
                 className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Enter short description"
+                disabled
               />
             </div>
           </div>
           <div className="flex">
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || disabled}
               className="bg-blue-600 hover:bg-blue-800  text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline w-fit"
             >
               Save

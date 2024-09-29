@@ -19,6 +19,7 @@ export interface IProduct {
   id: string;
   purchased_at?: string;
   purchaser_name?: string;
+  is_readonly?: boolean;
 }
 
 export interface ICartContext {

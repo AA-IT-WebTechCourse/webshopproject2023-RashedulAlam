@@ -14,10 +14,7 @@ from rest_framework.response import Response
 class ProductListView(generics.ListAPIView):
     permission_classes = []
     serializer_class = ProductListSerializer
-    queryset = Product.objects.all()
-
-    class Meta:
-        ordering = ['created_at']
+    queryset = Product.objects.all().order_by('-created_at')
 
     @extend_schema(
         parameters=[
