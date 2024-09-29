@@ -17,6 +17,8 @@ export interface IProduct {
   owner_name: string;
   created_at: string;
   id: string;
+  purchased_at?: string;
+  purchaser_name?: string;
 }
 
 export interface ICartContext {
@@ -24,4 +26,6 @@ export interface ICartContext {
   addToCart?: (product: IProduct) => void;
   removeFromCart?: (product: IProduct) => void;
   isExistsOnCart?: (product: IProduct) => boolean;
+  mergeUpdatedProducts?: (products: IProduct[]) => void;
+  clearAll?: () => void;
 }

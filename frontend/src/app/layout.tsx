@@ -29,12 +29,12 @@ export default function RootLayout({
         <AuthenticationProvider>
           <CartProvider>
             <Navbar />
-            {children}
+            <div className="max-w-screen-xl mx-auto">{children}</div>
             <Footer />
           </CartProvider>
           <ToastContainer
             position="top-right"
-            autoClose={2000}
+            autoClose={1000}
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick

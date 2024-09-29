@@ -28,7 +28,7 @@ const ProductCard = ({
 
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 1000);
   };
 
   const { created_at, description, id, owner_name, price, title } = product;

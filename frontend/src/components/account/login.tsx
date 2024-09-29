@@ -9,6 +9,7 @@ import instance from "@/libs/utils/api";
 import { AxiosResponse } from "axios";
 import config from "@/config/config";
 import { toast } from "react-toastify";
+import withoutAuth from "../HOC/withoutAuth";
 
 const Login = () => {
   const {
@@ -143,4 +144,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withoutAuth(Login);

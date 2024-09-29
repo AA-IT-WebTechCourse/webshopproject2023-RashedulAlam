@@ -1,18 +1,26 @@
 "use client";
 import React, { useState } from "react";
 import axiosInstance from "@/libs/utils/api";
+import config from "@/config/config";
+import { useAuth } from "@/contexts/authenticationContext";
 
 const PopulateDb = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>();
+  const { isLoggedIn, logoutUser } = useAuth();
 
   const onClickHandler = () => {
     setLoading(true);
-
-    setTimeout(() => {
+    axiosInstance.post(config.API_URLS.POPULATE_DB).then(() => {
       setLoading(false);
-      setMessage("Database have been re-populated");
-    }, 5000);
+      if (isLoggedIn) {
+        logoutUser && logoutUser();
+      }
+
+      setMessage(
+        "Database have been re-populated. Please login again if already logged in !"
+      );
+    });
   };
 
   const label = `Automatically populate the DB with 6 users, of which 3 users (i.e.

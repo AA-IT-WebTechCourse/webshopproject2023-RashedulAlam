@@ -9,14 +9,23 @@ import React, {
 import { ICartContext, IProduct } from "./contexts.d";
 import config from "@/config/config";
 import { toast } from "react-toastify";
+import { useAuth } from "./authenticationContext";
 
 const CartContext = createContext<ICartContext>({ products: [] });
 
 export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { user, isLoggedIn } = useAuth();
 
   const addProductHandler = (product: IProduct) => {
+    if (user?.username == product.owner_name) {
+      toast.error(
+        `${product.title} can not be added as it's your own product!`
+      );
+
+      return;
+    }
     setProducts((x: IProduct[]) => {
       const updatedProducts = [...x, product];
       updateLocalStorage(updatedProducts);
@@ -38,6 +47,29 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
     toast.warning(`${product.title} has been removed from your cart!`);
   };
 
+  const mergeProductHandler = (updatedProducts: IProduct[]) => {
+    setProducts((existingProducts: IProduct[]) => {
+      const mergedProductDictionary: { [x: string]: IProduct } =
+        updatedProducts.reduce(
+          (prev, current) => Object.assign(prev, { [current.id]: current }),
+          {}
+        );
+
+      const newProducts = existingProducts.map((x) => {
+        return !!mergedProductDictionary[x.id]
+          ? mergedProductDictionary[x.id]
+          : x;
+      });
+
+      return newProducts;
+    });
+  };
+
+  const clearAllHandler = () => {
+    setProducts([]);
+    updateLocalStorage([]);
+  };
+
   const updateLocalStorage = (products: IProduct[]) => {
     setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -53,11 +85,13 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
     return !!products.find((x) => x.id === product.id);
   };
 
-  const contextvalue = {
+  const contextvalue: ICartContext = {
     products,
     addToCart: addProductHandler,
     removeFromCart: removeProductHandler,
     isExistsOnCart: isExistsOnCart,
+    mergeUpdatedProducts: mergeProductHandler,
+    clearAll: clearAllHandler,
   };
 
   useEffect(() => {

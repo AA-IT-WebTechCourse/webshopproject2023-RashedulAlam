@@ -55,6 +55,22 @@ export const AuthenticationProvider: React.FC<PropsWithChildren> = ({
     setLoading(false);
   }, [setLoading]);
 
+  useEffect(() => {
+    const handleStorageChange = (event: any) => {
+      if (event.key === config.LOCAL_STORAGE.TOKEN) {
+        if (!event.newValue && !!user) {
+          logoutUser();
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [user]);
+
   return (
     <>
       {loading ? (

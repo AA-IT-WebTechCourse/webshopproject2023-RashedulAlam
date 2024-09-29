@@ -2,20 +2,20 @@ import { useAuth } from "@/contexts/authenticationContext";
 import { useRouter } from "next/navigation";
 import React, { useEffect, ComponentType } from "react";
 
-type WithAuthProps = {};
+type WithoutAuthProps = {};
 
-function withAuth<P extends object>(WrappedComponent: ComponentType<P>) {
-  const Wrapper: React.FC<P & WithAuthProps> = (props) => {
+function withoutAuth<P extends object>(WrappedComponent: ComponentType<P>) {
+  const Wrapper: React.FC<P & WithoutAuthProps> = (props) => {
     const { isLoggedIn } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
-      if (!isLoggedIn) {
-        router.push("/login");
+      if (isLoggedIn) {
+        router.push("/");
       }
     }, [isLoggedIn, router]);
 
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       return null;
     }
 
@@ -25,4 +25,4 @@ function withAuth<P extends object>(WrappedComponent: ComponentType<P>) {
   return Wrapper;
 }
 
-export default withAuth;
+export default withoutAuth;

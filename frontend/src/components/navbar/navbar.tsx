@@ -25,7 +25,7 @@ const Navbar = () => {
 
   const additionalMenus = [
     {
-      name: "Database Population",
+      name: "Database Seeding",
       url: "/db-population",
     },
     ...(isLoggedIn
@@ -59,8 +59,8 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="relative bg-white mb-5">
-        <div className="container mx-auto">
+      <div className="relative bg-white mb-5 ">
+        <div className="container mx-auto max-w-screen-xl">
           <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/">
