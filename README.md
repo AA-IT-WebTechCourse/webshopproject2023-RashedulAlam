@@ -1,1 +1,78 @@
 # WebShop
+
+## Author
+- **Name**: Rashedul Alam
+- **Email**: rashedul.alam@abo.fi
+
+## Implemented Features
+This project has all the implementation of mandatory and optional requirements.
+
+### Core Features:
+- User authentication (login, registration)
+- Product listing and filtering
+- Shopping cart functionality
+- Payment processing
+- Inventory
+
+### Optional Requirements Implemented:
+- **RQ-6**: Search
+- **RQ-11**: Remove from the cart
+- **RQ-12**: Pay
+- **RQ-13**: Routing
+- **RQ-14**: Edit Account
+- **RQ-15**: Display inventory
+- **RQ-16**: Edit item
+- **Non Functional**: The web pages should look nice and easy to use on regular desktop screens
+
+## How to Run the Project
+
+### Prerequisites
+Make sure you have the following installed on your system(these version has been used while local development however older version may work):
+- **Python  3.12.0 or later**
+- **Node v20.10.0 or later**
+
+### Step-by-Step Instructions
+
+#### 1. Clone the Repository
+```bash
+git clone https://github.com/AA-IT-WebTechCourse/webshopproject2023-RashedulAlam
+cd webshopproject2023-RashedulAlam
+```
+#### 2. Set up a Virtual Environment
+```bash
+python -m venv env
+source env/bin/activate
+```
+#### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+#### 4. Apply Migrations
+```bash
+python manage.py migrate
+```
+
+#### 5. Apply Migrations
+```bash
+python manage.py migrate
+```
+#### 6. Run the Development Backend Server
+```bash
+python manage.py runserver
+```
+#### 7. Run the Development frontend server
+```bash
+cd frontend
+npm install
+npm run dev
+```
+#### 8. Validate the successful running servers 
+- http://localhost:3000 on browser will show the UI of webshop 
+- http://localhost:8000/swagger will show the Open API documentation for backend
+
+If both backend and frontend server runs properly then start browsing the application. There is optional to populate the database. Make sure to popuate to start the testing. 
+
+## Conclusion
+
+**Incase of any issue while running and testing the application please reach out to me using the given email**
