@@ -23,14 +23,16 @@ const config = {
       UPDATE_PRODUCT: (id: string) => `api/v1/inventory/products/${id}/`,
     },
     INVENTORY: {
-      PRODUCTS: (pageSize: number, type: any) =>
-        `api/v1/inventory/products/?page=${pageSize}&type=${type}`,
+      PRODUCTS: (pageSize: number, type: any, searchTerm: string) =>
+        `api/v1/inventory/products/?page=${pageSize}&type=${type}${
+          !!searchTerm ? `&search=${searchTerm}` : ""
+        }`,
     },
     USER_MANAGEMENT: {
       CURRENT_USER: "api/v1/user-management/current-user/",
       UPDATE_USER_PASSWORD: "api/v1/user-management/change-password/",
     },
-    PAY: 'api/v1/pay/'
+    PAY: "api/v1/pay/",
   },
   PAGINATION: {
     PAGE_SIZE: 10,

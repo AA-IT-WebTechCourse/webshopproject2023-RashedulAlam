@@ -83,7 +83,7 @@ const Register = () => {
             </div>
             {errors.username?.type === "required" && (
               <p role="alert" className="text-red-600 font-semibold mt-2">
-                {errors.username.message}
+                Username is required
               </p>
             )}
           </div>
@@ -105,7 +105,7 @@ const Register = () => {
             </div>
             {errors.email?.type === "required" && (
               <p role="alert" className="text-red-600 font-semibold mt-2">
-                {errors.email.message}
+                Email is required
               </p>
             )}
           </div>
