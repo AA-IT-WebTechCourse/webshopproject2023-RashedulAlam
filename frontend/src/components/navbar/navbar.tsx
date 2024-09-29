@@ -39,7 +39,7 @@ const Navbar = () => {
     {
       name: "Docs",
       openNewTab: true,
-      url: "https://github.com/AA-IT-WebTechCourse/webshopproject2023-RashedulAlam",
+      url: "https://github.com/AA-IT-WebTechCourse/webshopproject2023-RashedulAlam/blob/main/README.md",
     },
   ];
 
