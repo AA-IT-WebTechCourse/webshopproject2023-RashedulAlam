@@ -30,6 +30,7 @@ const config = {
       CURRENT_USER: "api/v1/user-management/current-user/",
       UPDATE_USER_PASSWORD: "api/v1/user-management/change-password/",
     },
+    PAY: 'api/v1/pay/'
   },
   PAGINATION: {
     PAGE_SIZE: 10,

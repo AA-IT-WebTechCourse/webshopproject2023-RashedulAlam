@@ -47,6 +47,29 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
     toast.warning(`${product.title} has been removed from your cart!`);
   };
 
+  const mergeProductHandler = (updatedProducts: IProduct[]) => {
+    setProducts((existingProducts: IProduct[]) => {
+      const mergedProductDictionary: { [x: string]: IProduct } =
+        updatedProducts.reduce(
+          (prev, current) => Object.assign(prev, { [current.id]: current }),
+          {}
+        );
+
+      const newProducts = existingProducts.map((x) => {
+        return !!mergedProductDictionary[x.id]
+          ? mergedProductDictionary[x.id]
+          : x;
+      });
+
+      return newProducts;
+    });
+  };
+
+  const clearAllHandler = () => {
+    setProducts([]);
+    updateLocalStorage([]);
+  };
+
   const updateLocalStorage = (products: IProduct[]) => {
     setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -62,11 +85,13 @@ export const CartProvider: React.FC<PropsWithChildren> = ({ children }) => {
     return !!products.find((x) => x.id === product.id);
   };
 
-  const contextvalue = {
+  const contextvalue: ICartContext = {
     products,
     addToCart: addProductHandler,
     removeFromCart: removeProductHandler,
     isExistsOnCart: isExistsOnCart,
+    mergeUpdatedProducts: mergeProductHandler,
+    clearAll: clearAllHandler,
   };
 
   useEffect(() => {

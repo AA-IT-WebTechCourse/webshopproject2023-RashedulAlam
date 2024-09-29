@@ -14,7 +14,16 @@ const InventoryCard: React.FC<IInventoryCardProps> = ({
     router.push(`/myitems/${id}`);
   };
 
-  const { created_at, description, id, owner_name, price, title } = product;
+  const {
+    created_at,
+    description,
+    id,
+    owner_name,
+    price,
+    title,
+    purchased_at,
+    purchaser_name,
+  } = product;
 
   return (
     <div className="w-full bg-white shadow-md rounded-xl duration-500 hover:scale-[1.02] hover:shadow-xl flex flex-row justify-between">
@@ -28,11 +37,11 @@ const InventoryCard: React.FC<IInventoryCardProps> = ({
             {viewType == ETabNames.SOLD && (
               <>
                 <p className="text-white text-xs p-1 rounded-md bg-gray-500">
-                  Purchased by: {owner_name}
+                  Purchased by: {purchaser_name}
                 </p>
 
                 <p className="text-white text-xs w-fit p-1 rounded-md bg-blue-500">
-                  Purchased Date: 2012-12-12 10 am
+                  Purchased Date: {purchased_at && formateDate(purchased_at)}
                 </p>
               </>
             )}
@@ -40,11 +49,11 @@ const InventoryCard: React.FC<IInventoryCardProps> = ({
             {viewType == ETabNames.PURCHASED && (
               <>
                 <p className="text-white text-xs p-1 rounded-md bg-gray-500">
-                  Purchased from: ralam
+                  Purchased from: {owner_name}
                 </p>
 
                 <p className="text-white text-xs p-1 rounded-md bg-blue-500">
-                  Purchased Date: 2012-12-12 10 am
+                  Purchased Date: {purchased_at && formateDate(purchased_at)}
                 </p>
               </>
             )}
