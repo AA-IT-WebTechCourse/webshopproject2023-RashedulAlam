@@ -17,6 +17,7 @@ import axiosInstance from "@/libs/utils/api";
 import { IPaginationResponse } from "../inventory/inventory.d";
 import config from "@/config/config";
 import { IProduct } from "@/contexts/contexts.d";
+import LoadingSkeleton from "../loadingSkeleton/loadingSkeleton";
 
 const LandingPage = () => {
   const [viewType, setViewType] = useState<ViewType>(ViewType.GRID_VIEW);
@@ -25,6 +26,8 @@ const LandingPage = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
   const { addToCart, removeFromCart, isExistsOnCart } = useCart();
+  const [loading, setLoading] = useState<boolean>(true);
+
   const { isLoggedIn } = useAuth();
   const productProps: IProductsProps = {
     products: products,
@@ -51,6 +54,7 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     axiosInstance
       .get<IPaginationResponse<IProduct>>(
         config.API_URLS.PRODUCT.PRODUCTS(currentPage, searchText)
@@ -61,8 +65,15 @@ const LandingPage = () => {
             setProducts(data.results);
             setTotalPages(Math.ceil(data.count / config.PAGINATION.PAGE_SIZE));
           }
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         },
-        () => {}
+        () => {
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
+        }
       );
   }, [searchText, currentPage]);
 
@@ -72,7 +83,11 @@ const LandingPage = () => {
         <Search {...searchProps} />
         <ViewToggle {...viewToggleProps} />
       </div>
-      <Products {...productProps} />
+      {loading ? (
+        <LoadingSkeleton viewType={viewType} />
+      ) : (
+        <Products {...productProps} />
+      )}
       <Pagination {...paginationProps} />
     </div>
   );
