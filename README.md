@@ -52,26 +52,36 @@ pip install -r requirements.txt
 ```bash
 python manage.py migrate
 ```
-
-#### 5. Apply Migrations
-```bash
-python manage.py migrate
-```
-#### 6. Run the Development Backend Server
+#### 5. Run the Development Backend Server
 ```bash
 python manage.py runserver
 ```
-#### 7. Run the Development frontend server
+#### 6. Run the Development frontend server
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-#### 8. Validate the successful running servers 
+#### 7. Validate the successful running servers 
 - http://localhost:3000 on browser will show the UI of webshop 
 - http://localhost:8000/swagger will show the Open API documentation for backend
 
 If both backend and frontend server runs properly then start browsing the application. There is optional to populate the database. Make sure to popuate to start the testing. 
+
+## Samples of Webshop
+
+Here is a series of images to demonstrate:
+
+![Image 1 Description](./demos/landing-page.png)
+![Image 2 Description](./demos/swagger.png)
+![Image 3 Description](./demos/account.png)
+![Image 4 Description](./demos/database-seed.png)
+![Image 5 Description](./demos/inventory-1.png)
+![Image 6 Description](./demos/inventory-2.png)
+![Image 7 Description](./demos/inventory-3.png)
+![Image 8 Description](./demos/purchase-summary.png)
+![Image 9 Description](./demos/validation-error.png)
+
 
 ## Conclusion
 
