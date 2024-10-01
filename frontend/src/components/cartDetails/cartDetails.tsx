@@ -266,4 +266,6 @@ const CartDetails = () => {
   );
 };
 
-export default withAuth(CartDetails);
+const cartDetails = withAuth(CartDetails);
+
+export default cartDetails;

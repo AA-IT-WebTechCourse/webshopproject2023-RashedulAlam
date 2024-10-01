@@ -211,4 +211,7 @@ const UpdateAccount = () => {
   );
 };
 
-export default withAuth(UpdateAccount);
+
+const updateAccount = withAuth(UpdateAccount);
+
+export default updateAccount;

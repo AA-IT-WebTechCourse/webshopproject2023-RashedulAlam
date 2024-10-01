@@ -5,6 +5,7 @@ import { TCreateProduct } from "./product.d";
 import { axiosInstanceWithAuth } from "@/libs/utils/api";
 import config from "@/config/config";
 import { toast } from "react-toastify";
+import withAuth from "../HOC/withAuth";
 
 const AddProduct = () => {
   const {
@@ -131,4 +132,6 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+const addProduct = withAuth(AddProduct);
+
+export default addProduct;

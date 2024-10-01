@@ -144,4 +144,6 @@ const Login = () => {
   );
 };
 
-export default withoutAuth(Login);
+const login = withoutAuth(Login);
+
+export default login;
