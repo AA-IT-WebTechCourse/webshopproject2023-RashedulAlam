@@ -1,0 +1,182 @@
+[
+    {
+        "name": "Wireless Headphones",
+        "description": "Noise-cancelling over-ear headphones",
+        "price": 199.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "Bluetooth Speaker",
+        "description": "Portable waterproof speaker",
+        "price": 89.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "Smart Watch",
+        "description": "Fitness tracking smart watch",
+        "price": 149.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "Gaming Mouse",
+        "description": "Ergonomic wireless gaming mouse",
+        "price": 59.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "Mechanical Keyboard",
+        "description": "RGB backlit mechanical keyboard",
+        "price": 129.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "External SSD",
+        "description": "Portable high-speed SSD",
+        "price": 99.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "4K Monitor",
+        "description": "Ultra HD 27-inch monitor",
+        "price": 349.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "USB-C Hub",
+        "description": "7-in-1 multiport adapter",
+        "price": 49.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "Wireless Charger",
+        "description": "Fast wireless charging pad",
+        "price": 39.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "Smartphone Stand",
+        "description": "Adjustable phone holder",
+        "price": 24.99,
+        "seller_name": "testuser1"
+    },
+    {
+        "name": "Digital Camera",
+        "description": "Compact 24MP digital camera",
+        "price": 499.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Tripod",
+        "description": "Lightweight aluminum tripod",
+        "price": 59.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Camera Lens",
+        "description": "50mm prime lens for DSLR",
+        "price": 249.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Memory Card",
+        "description": "128GB high-speed memory card",
+        "price": 39.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Camera Bag",
+        "description": "Water-resistant camera bag",
+        "price": 79.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Photo Editing Software",
+        "description": "Professional photo editing software",
+        "price": 99.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Action Camera",
+        "description": "4K action camera with waterproof case",
+        "price": 199.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Camera Stabilizer",
+        "description": "Handheld gimbal stabilizer",
+        "price": 139.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Lighting Kit",
+        "description": "Professional photography lighting kit",
+        "price": 129.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Drone",
+        "description": "Quadcopter drone with 4K camera",
+        "price": 599.99,
+        "seller_name": "testuser2"
+    },
+    {
+        "name": "Electric Kettle",
+        "description": "Stainless steel electric kettle",
+        "price": 49.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Coffee Maker",
+        "description": "Single-serve coffee brewer",
+        "price": 89.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Blender",
+        "description": "High-performance countertop blender",
+        "price": 129.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Microwave Oven",
+        "description": "Compact countertop microwave oven",
+        "price": 159.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Air Fryer",
+        "description": "Digital air fryer with touch controls",
+        "price": 149.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Toaster",
+        "description": "2-slice toaster with wide slots",
+        "price": 39.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Rice Cooker",
+        "description": "6-cup capacity rice cooker",
+        "price": 59.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Slow Cooker",
+        "description": "7-quart programmable slow cooker",
+        "price": 99.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Pressure Cooker",
+        "description": "Electric pressure cooker",
+        "price": 129.99,
+        "seller_name": "testuser3"
+    },
+    {
+        "name": "Stand Mixer",
+        "description": "Tilt-head stand mixer with attachments",
+        "price": 299.99,
+        "seller_name": "testuser3"
+    }
+]

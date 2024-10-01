@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import axiosInstance from "@/libs/utils/api";
 import config from "@/config/config";
 import { useAuth } from "@/contexts/authenticationContext";
+import { IPopulateDbResponse } from "./populateDb.d";
+import { AxiosResponse } from "axios";
 
 const PopulateDb = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -11,16 +13,26 @@ const PopulateDb = () => {
 
   const onClickHandler = () => {
     setLoading(true);
-    axiosInstance.post(config.API_URLS.POPULATE_DB).then(() => {
-      setLoading(false);
-      if (isLoggedIn) {
-        logoutUser && logoutUser();
-      }
+    axiosInstance
+      .post<null, AxiosResponse<IPopulateDbResponse>>(
+        config.API_URLS.POPULATE_DB
+      )
+      .then(({ data }) => {
+        setLoading(false);
+        if (data?.is_successful) {
+          if (isLoggedIn) {
+            logoutUser && logoutUser();
+          }
 
-      setMessage(
-        "Database have been re-populated. Please login again if already logged in !"
-      );
-    });
+          setMessage(
+            "Database have been re-populated. Please login again if already logged in !"
+          );
+        } else {
+          setMessage(
+            "There have been error. Database have not been re-populated!"
+          );
+        }
+      });
   };
 
   const label = `Automatically populate the DB with 6 users, of which 3 users (i.e.

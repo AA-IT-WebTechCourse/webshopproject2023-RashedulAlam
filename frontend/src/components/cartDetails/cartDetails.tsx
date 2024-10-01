@@ -24,12 +24,12 @@ const CartDetails = () => {
   };
 
   const totalPrice = products.reduce(
-    (current, prev) => current + parseInt(prev.price.toString()),
+    (current, prev) => current + Number(prev.price),
     0
   );
 
   const totalPurchasedPrice = purchasedProducts.reduce(
-    (current, prev) => current + parseInt(prev.price.toString()),
+    (current, prev) => current + Number(prev.price),
     0
   );
 

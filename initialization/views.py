@@ -1,8 +1,15 @@
+import json
+import os
+from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
 from inventory.models import Product
+
+users_seed_file_path = os.path.join(settings.BASE_DIR, 'seed', 'users.json')
+products_seed_file_path = os.path.join(
+    settings.BASE_DIR, 'seed', 'products.json')
 
 
 class InitializationView(APIView):
@@ -18,34 +25,38 @@ class InitializationView(APIView):
         response = None
 
         try:
-            # turn on before submit
-            # User.objects.all().delete()
-            User.objects.filter(is_superuser=False).delete()
+            User.objects.all().delete()
             Product.objects.all().delete()
 
-            for i in range(1, 7):
-                user_name = f'testuser{i}'
-                email = f'testuser{i}@shop.aa'
-                password = f'pass{i}'
+            with open(users_seed_file_path, 'r') as user_file:
+                users_data = json.load(user_file)
+        
+                for user in users_data:
+                    username = user['username']
+                    email = user['email']
+                    password = user['password']
+                
+                    User.objects.create_user(
+                        username=username,
+                        email=email,
+                        password=password,
+                    )
 
-                user = User.objects.create_user(
-                    username=user_name,
-                    email=email,
-                    password=password,
-                )
-
-                if i < 4 : 
-                    for j in range(1, 11):
-                        Product.objects.create(
-                            title=f'Product {j}',
-                            price=i*100.00,
-                            description=f'Product Description {j}',
-                            owner=user
-                        )
+            with open(products_seed_file_path, 'r') as product_file:
+                products_data = json.load(product_file)
+                for product in products_data:
+                    owner = User.objects.get(username=product['seller_name'],)
+                    Product.objects.create(
+                        title=product['name'],
+                        price=product['price'],
+                        description=product['description'],
+                        owner=owner
+                    )
 
             response = {"is_successful": True}
 
-        except Exception:
+        except Exception as e:
+            print(str(e))
             response = {"is_successful": False}
 
         return Response(response, status=status.HTTP_200_OK)
