@@ -11,6 +11,8 @@ import config from "@/config/config";
 import { IPaginationProps } from "../pagination/pagination.d";
 import Search from "../search/search";
 import { ISearchProps } from "../search/search.d";
+import LoadingSkeleton from "../loadingSkeleton/loadingSkeleton";
+import { ViewType } from "../product/product.d";
 
 const Inventory: React.FC<IInventoryProps> = () => {
   const [activeTab, setActiveTab] = useState<ETabNames>(ETabNames.SALE);
@@ -19,6 +21,7 @@ const Inventory: React.FC<IInventoryProps> = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [searchText, setSearchText] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const tabClass = {
     active: " bg-gray-200 hover:bg-gray-200",
@@ -34,6 +37,7 @@ const Inventory: React.FC<IInventoryProps> = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     axiosInstanceWithAuth
       .get<IPaginationResponse<IProduct>>(
         config.API_URLS.INVENTORY.PRODUCTS(currentPage, activeTab, searchText)
@@ -44,8 +48,15 @@ const Inventory: React.FC<IInventoryProps> = () => {
             setProducts(data.results);
             setTotalPages(Math.ceil(data.count / config.PAGINATION.PAGE_SIZE));
           }
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         },
-        () => {}
+        () => {
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
+        }
       );
   }, [currentPage, activeTab, searchText]);
 
@@ -123,7 +134,10 @@ const Inventory: React.FC<IInventoryProps> = () => {
             </>
           )}
         </div>
-        {products.length ? (
+
+        {loading ? (
+          <LoadingSkeleton viewType={ViewType.LIST_VIEW} />
+        ) : products.length ? (
           <div className="flex flex-col gap-4">
             {products.map((x, i) => (
               <InventoryCard key={i} viewType={activeTab} product={x} />
@@ -154,4 +168,6 @@ const Inventory: React.FC<IInventoryProps> = () => {
   );
 };
 
-export default withAuth(Inventory);
+const inventory = withAuth(Inventory);
+
+export default inventory;

@@ -7,6 +7,7 @@ import { axiosInstanceWithAuth } from "@/libs/utils/api";
 import config from "@/config/config";
 import { IProduct } from "@/contexts/contexts.d";
 import { toast } from "react-toastify";
+import withAuth from "../HOC/withAuth";
 
 const EditProduct = () => {
   const {
@@ -162,4 +163,5 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+const editProduct = withAuth(EditProduct);
+export default editProduct;

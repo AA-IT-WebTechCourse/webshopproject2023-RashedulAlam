@@ -192,4 +192,6 @@ const Register = () => {
   );
 };
 
-export default withoutAuth(Register);
+const register = withoutAuth(Register);
+
+export default register;

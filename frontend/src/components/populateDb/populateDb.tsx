@@ -84,4 +84,6 @@ const PopulateDb = () => {
   );
 };
 
-export default PopulateDb;
+const populateDb = PopulateDb;
+
+export default populateDb;

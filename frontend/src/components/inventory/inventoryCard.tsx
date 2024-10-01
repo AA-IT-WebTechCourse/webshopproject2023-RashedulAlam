@@ -98,4 +98,6 @@ const InventoryCard: React.FC<IInventoryCardProps> = ({
   );
 };
 
-export default InventoryCard;
+const inventoryCard = InventoryCard;
+
+export default inventoryCard;
