@@ -56,7 +56,16 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
-#### 6. Run the Development frontend server
+#### 6. Run the Development frontend server or locally in production mode
+Production Mode (Faster Browsing)
+```bash
+cd frontend
+npm install
+# npm run build 
+# The code command should be run incase want to regenerate the build folders
+npm run start
+```
+Dev Mode (Slow Browsing)
 ```bash
 cd frontend
 npm install
