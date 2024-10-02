@@ -7,7 +7,7 @@ import config from "@/config/config";
 import { toast } from "react-toastify";
 import withAuth from "../HOC/withAuth";
 
-const AddProduct = () => {
+const AddProductBase = () => {
   const {
     register,
     handleSubmit,
@@ -132,6 +132,6 @@ const AddProduct = () => {
   );
 };
 
-const addProduct = withAuth(AddProduct);
+const AddProduct = withAuth(AddProductBase);
 
-export default addProduct;
+export default AddProduct;

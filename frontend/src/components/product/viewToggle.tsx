@@ -2,7 +2,7 @@ import React from "react";
 import { IViewToggleProps, ViewType } from "./product.d";
 
 
-const viewToggle: React.FC<IViewToggleProps> = ({ viewType, setViewType }) => {
+const ViewToggle: React.FC<IViewToggleProps> = ({ viewType, setViewType }) => {
   return (
     <div className="flex flex-row gap-4 items-center">
       <button aria-label="list view" className="w-fit h-fit p-1" onClick={() => setViewType(ViewType.LIST_VIEW)}>
@@ -48,4 +48,4 @@ const viewToggle: React.FC<IViewToggleProps> = ({ viewType, setViewType }) => {
   );
 };
 
-export default viewToggle;
+export default ViewToggle;

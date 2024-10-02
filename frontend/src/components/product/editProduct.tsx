@@ -9,7 +9,7 @@ import { IProduct } from "@/contexts/contexts.d";
 import { toast } from "react-toastify";
 import withAuth from "../HOC/withAuth";
 
-const EditProduct = () => {
+const EditProductBase = () => {
   const {
     register,
     handleSubmit,
@@ -163,5 +163,6 @@ const EditProduct = () => {
   );
 };
 
-const editProduct = withAuth(EditProduct);
-export default editProduct;
+const EditProduct = withAuth(EditProductBase);
+
+export default EditProduct;

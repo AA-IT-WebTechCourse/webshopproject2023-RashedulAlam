@@ -11,7 +11,7 @@ import config from "@/config/config";
 import { toast } from "react-toastify";
 import withoutAuth from "../HOC/withoutAuth";
 
-const Login = () => {
+const LoginBase = () => {
   const {
     register,
     handleSubmit,
@@ -144,6 +144,6 @@ const Login = () => {
   );
 };
 
-const login = withoutAuth(Login);
+const Login = withoutAuth(LoginBase);
 
-export default login;
+export default Login;

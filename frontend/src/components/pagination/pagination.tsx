@@ -1,7 +1,7 @@
 import React from "react";
 import { IPaginationProps } from "./pagination.d";
 
-const pagination: React.FC<IPaginationProps> = ({
+const Pagination: React.FC<IPaginationProps> = ({
   currentPage = 1,
   totalPages = 0,
   onPageChange,
@@ -53,4 +53,4 @@ const pagination: React.FC<IPaginationProps> = ({
   );
 };
 
-export default pagination;
+export default Pagination;

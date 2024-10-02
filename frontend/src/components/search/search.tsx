@@ -1,7 +1,7 @@
 import React from "react";
 import { ISearchProps } from "./search.d";
 
-const search: React.FC<ISearchProps> = ({ searchText, onSearch }) => {
+const Search: React.FC<ISearchProps> = ({ searchText, onSearch }) => {
   return (
     <div className="flex relative h-12">
       <svg
@@ -31,4 +31,4 @@ const search: React.FC<ISearchProps> = ({ searchText, onSearch }) => {
   );
 };
 
-export default search;
+export default Search;

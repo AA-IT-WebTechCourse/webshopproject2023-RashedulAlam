@@ -1,6 +1,6 @@
 import React from "react";
 
-const footer = () => {
+const Footer = () => {
     const footerNote = `${new Date().getFullYear()} WebShop`;
   return (
     <div className="py-6 mt-12 border-t border-gray-200 container mx-auto flex items-center flex-col">
@@ -13,4 +13,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;

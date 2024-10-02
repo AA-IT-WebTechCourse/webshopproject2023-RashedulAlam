@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import config from "@/config/config";
 import withoutAuth from "../HOC/withoutAuth";
 
-const Register = () => {
+const RegisterBase = () => {
   const {
     register,
     handleSubmit,
@@ -192,6 +192,6 @@ const Register = () => {
   );
 };
 
-const register = withoutAuth(Register);
+const Register = withoutAuth(RegisterBase);
 
-export default register;
+export default Register;

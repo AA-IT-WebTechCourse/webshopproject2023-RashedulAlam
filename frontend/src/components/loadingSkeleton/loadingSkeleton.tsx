@@ -64,7 +64,7 @@ const ListViewLoadingSkeleton: React.FC<{}> = () => {
   );
 };
 
-const loadingSkeleton: React.FC<ILoadingSkeletonProps> = ({ viewType }) => {
+const LoadingSkeleton: React.FC<ILoadingSkeletonProps> = ({ viewType }) => {
   const products = Array(8).fill(1);
   
   return (
@@ -80,4 +80,4 @@ const loadingSkeleton: React.FC<ILoadingSkeletonProps> = ({ viewType }) => {
   );
 };
 
-export default loadingSkeleton;
+export default LoadingSkeleton;

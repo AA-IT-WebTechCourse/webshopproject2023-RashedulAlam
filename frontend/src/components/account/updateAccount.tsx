@@ -8,7 +8,7 @@ import { HttpStatusCode } from "axios";
 import { toast } from "react-toastify";
 import withAuth from "../HOC/withAuth";
 
-const UpdateAccount = () => {
+const UpdateAccountBase = () => {
   const {
     register,
     handleSubmit,
@@ -212,6 +212,6 @@ const UpdateAccount = () => {
 };
 
 
-const updateAccount = withAuth(UpdateAccount);
+const UpdateAccount = withAuth(UpdateAccountBase);
 
-export default updateAccount;
+export default UpdateAccount;

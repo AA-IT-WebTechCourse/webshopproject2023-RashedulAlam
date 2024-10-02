@@ -14,7 +14,7 @@ import { ISearchProps } from "../search/search.d";
 import LoadingSkeleton from "../loadingSkeleton/loadingSkeleton";
 import { ViewType } from "../product/product.d";
 
-const Inventory: React.FC<IInventoryProps> = () => {
+const InventoryBase: React.FC<IInventoryProps> = () => {
   const [activeTab, setActiveTab] = useState<ETabNames>(ETabNames.SALE);
   const [products, setProducts] = useState<IProduct[]>([]);
   const router = useRouter();
@@ -168,6 +168,6 @@ const Inventory: React.FC<IInventoryProps> = () => {
   );
 };
 
-const inventory = withAuth(Inventory);
+const Inventory = withAuth(InventoryBase);
 
-export default inventory;
+export default Inventory;

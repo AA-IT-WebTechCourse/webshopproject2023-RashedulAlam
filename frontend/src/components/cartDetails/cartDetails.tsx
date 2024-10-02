@@ -10,7 +10,7 @@ import { HttpStatusCode } from "axios";
 import { toast } from "react-toastify";
 import { IProduct } from "@/contexts/contexts.d";
 
-const CartDetails = () => {
+const CartDetailsBase = () => {
   const router = useRouter();
   const { products, removeFromCart, mergeUpdatedProducts, clearAll } =
     useCart();
@@ -266,6 +266,6 @@ const CartDetails = () => {
   );
 };
 
-const cartDetails = withAuth(CartDetails);
+const CartDetails = withAuth(CartDetailsBase);
 
-export default cartDetails;
+export default CartDetails;

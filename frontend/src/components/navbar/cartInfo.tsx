@@ -1,7 +1,7 @@
 import React from "react";
 import { ICartInfoProps } from "./navbar.d";
 
-const cartInfo: React.FC<ICartInfoProps> = ({ count, onIconClick }) => {
+const CartInfo: React.FC<ICartInfoProps> = ({ count, onIconClick }) => {
   return (
     <div className="flex flex-row">
       <button aria-label="shopping cart" className="relative flex flex-row p-2">
@@ -33,4 +33,4 @@ const cartInfo: React.FC<ICartInfoProps> = ({ count, onIconClick }) => {
   );
 };
 
-export default cartInfo;
+export default CartInfo;

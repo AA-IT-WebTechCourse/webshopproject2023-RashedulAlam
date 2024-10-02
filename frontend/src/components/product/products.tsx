@@ -2,7 +2,7 @@ import React from "react";
 import ProductCard from "./productCard";
 import { IProductsProps } from "./product.d";
 
-const products: React.FC<IProductsProps> = ({
+const Products: React.FC<IProductsProps> = ({
   products,
   viewType,
   addToCart,
@@ -26,4 +26,4 @@ const products: React.FC<IProductsProps> = ({
   );
 };
 
-export default products;
+export default Products;
