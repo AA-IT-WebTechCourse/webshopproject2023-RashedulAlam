@@ -62,7 +62,7 @@ Production Mode (Faster Browsing)
 cd frontend
 npm install
 # npm run build 
-# The code command should be run incase want to regenerate the build folders
+# The command should re-generate the build files from your machine
 npm run start
 ```
 Dev Mode (Slow Browsing)
@@ -71,6 +71,8 @@ cd frontend
 npm install
 npm run dev
 ```
+**note:** sometimes during running application on development mode requires browser refresh only for the first time incase any error due to bug on nextjs or webpack however on production running there were no error. It was observed sporadically.
+
 #### 7. Validate the successful running servers 
 - http://localhost:3000 on browser will show the UI of webshop 
 - http://localhost:8000/swagger will show the Open API documentation for backend
