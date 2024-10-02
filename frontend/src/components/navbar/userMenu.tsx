@@ -1,59 +1,58 @@
 import React from "react";
 import { IUserMenuProps } from "./navbar.d";
 
-const userMenus = [
-  {
-    name: "Settings",
-    icon: (
-      <>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-.99 1.51V21a2 2 0 0 1-2 2h-1.5a2 2 0 0 1-2-2v-.2a1.65 1.65 0 0 0-.99-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-.99H3a2 2 0 0 1-2-2v-1.5a2 2 0 0 1 2-2h.2a1.65 1.65 0 0 0 1.51-.99 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.28a1.65 1.65 0 0 0 .99-1.51V3a2 2 0 0 1 2-2h1.5a2 2 0 0 1 2 2v.2a1.65 1.65 0 0 0 .99 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.28a1.65 1.65 0 0 0 1.51.99H21a2 2 0 0 1 2 2v1.5a2 2 0 0 1-2 2h-.2a1.65 1.65 0 0 0-1.51.99z"></path>
-        </svg>
-      </>
-    ),
-    url: "/account",
-  },
-  {
-    name: "Logout",
-    icon: (
-      <>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-          <polyline points="16 17 21 12 16 7"></polyline>
-          <line x1="21" y1="12" x2="9" y2="12"></line>
-        </svg>
-      </>
-    ),
-    isLogOutMenu: true,
-  },
-];
-
 const UserMenu: React.FC<IUserMenuProps> = ({
   user,
   accountSettingHandler,
   logoutHandler,
 }) => {
+  const userMenus = [
+    {
+      name: "Settings",
+      icon: (
+        <>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-.99 1.51V21a2 2 0 0 1-2 2h-1.5a2 2 0 0 1-2-2v-.2a1.65 1.65 0 0 0-.99-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-.99H3a2 2 0 0 1-2-2v-1.5a2 2 0 0 1 2-2h.2a1.65 1.65 0 0 0 1.51-.99 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.28a1.65 1.65 0 0 0 .99-1.51V3a2 2 0 0 1 2-2h1.5a2 2 0 0 1 2 2v.2a1.65 1.65 0 0 0 .99 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.28a1.65 1.65 0 0 0 1.51.99H21a2 2 0 0 1 2 2v1.5a2 2 0 0 1-2 2h-.2a1.65 1.65 0 0 0-1.51.99z"></path>
+          </svg>
+        </>
+      ),
+      url: "/account",
+    },
+    {
+      name: "Logout",
+      icon: (
+        <>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </>
+      ),
+      isLogOutMenu: true,
+    },
+  ];
   const navigationHandler = (isLogOutMenu?: boolean) => {
     isLogOutMenu ? logoutHandler() : accountSettingHandler();
   };
