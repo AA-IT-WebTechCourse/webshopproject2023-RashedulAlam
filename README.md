@@ -41,7 +41,7 @@ cd webshopproject2023-RashedulAlam
 #### 2. Set up a Virtual Environment
 ```bash
 python -m venv env
-source env/bin/activate
+source env/Scripts/activate
 ```
 #### 3. Install Dependencies
 ```bash
@@ -56,6 +56,15 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+Or 
+```bash
+ python manage.py runserver 127.0.0.1:8000 
+```
+Or 
+```bash
+ python manage.py runserver 127.0.0.1:8000 --noreload
+```
+**note**: Make sure that backend server runs 8000 port and port is available locally. Incase the server is run on different port then .env file on frontend directory should be updated accordingly so that frontend can connect proper backend. 
 #### 6. Run the Development frontend server or locally in production mode
 Production Mode (Faster Browsing)
 ```bash
